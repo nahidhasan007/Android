@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/fragment1">
 
 
@@ -17,17 +18,20 @@
         android:layout_marginTop="184dp"
         android:hint="Enter Value"
         android:inputType="text"
+        android:usesCleartextTraffic="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/fragment1btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="174dp"
         android:layout_marginTop="55dp"
         android:layout_toRightOf="@id/inputText"
-        android:text="Send"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputText" />
 

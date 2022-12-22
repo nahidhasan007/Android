@@ -4,31 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:actionBarNavMode="standard"
+    app:titleTextColor="@color/white">
+
 
    <androidx.fragment.app.FragmentContainerView
        android:layout_width="match_parent"
-       android:layout_height="600dp"
+       android:layout_height="1000dp"
        android:id="@+id/fragmentContainer"/>
-   <Button
-       android:layout_width="150dp"
-       android:layout_height="60dp"
-      android:id="@+id/fragment1btn"
-      android:backgroundTint="@color/black"
-      android:layout_alignParentBottom="true"
-      android:layout_marginBottom="50dp"
-      android:layout_marginStart="30dp"
-      android:text="Fragment1"/>
-   <Button
-       android:layout_width="150dp"
-       android:layout_height="60dp"
-       android:id="@+id/fragment2btn"
-       android:backgroundTint="@color/black"
-       android:layout_alignParentBottom="true"
-       android:layout_alignParentRight="true"
-       android:layout_marginBottom="50dp"
-       android:layout_marginStart="30dp"
-       android:text="Fragment2"/>
 
 
 

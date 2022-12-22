@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/addQuotesFragment">
+
+    <fragment
+        android:id="@+id/addQuotesFragment"
+        android:name="com.example.mvvmapp.AddQuotesFragment"
+        android:label="fragment_add_quotes"
+        tools:layout="@layout/fragment_add_quotes" >
+        <action
+            android:id="@+id/action_addQuotesFragment_to_quotesFragment2"
+            app:destination="@id/quotesFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/quotesFragment2"
+        android:name="com.example.mvvmapp.quotesFragment"
+        android:label="fragment_quotes"
+        tools:layout="@layout/fragment_quotes" >
+        <action
+            android:id="@+id/action_quotesFragment2_to_addQuotesFragment"
+            app:destination="@id/addQuotesFragment" />
+    </fragment>
+</navigation>
