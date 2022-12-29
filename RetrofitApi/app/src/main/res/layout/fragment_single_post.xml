@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="post"
+            type="com.example.retrofitapi.ui.singlePost.SinglePostModelView" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        tools:context="ui.singlePost.SinglePost"
+        android:background="@drawable/roundedborder"
+        android:layout_gravity="center"
+        android:padding="10dp">
+
+
+        <TextView
+            android:layout_margin="30dp"
+            android:id="@+id/postTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:text="@{post.singlePost.title}"
+            tools:layout_editor_absoluteX="166dp"
+            tools:layout_editor_absoluteY="95dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/postBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginTop="24dp"
+            android:maxLines="2"
+            android:text="@{post.singlePost.body}"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/postTitle"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/postTitle"
+            app:layout_constraintTop_toBottomOf="@+id/postTitle" />
+
+        <Button
+            android:id="@+id/commentBtn"
+            android:layout_width="155dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/white"
+            android:paddingBottom="10dp"
+            android:text="See Comments"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/postBody"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/postBody"
+            app:layout_constraintTop_toBottomOf="@+id/postBody" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

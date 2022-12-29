@@ -27,17 +27,23 @@ class AdminFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
+
         adminBinding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_admin, container, false)
         adminViewModel = ViewModelProvider(this)[AdminViewModel::class.java]
+
         //var check = 0
         //var adminName: String
         //var adminPassword: String
+
         adminViewModel.readAdmin.observe(viewLifecycleOwner){
+
             //adminName = it[0].username
             //adminPassword = it[0].password
 
         }
+
         /*val admin = Superadmin(0,"Admin","Admin")
         if(check<=2){
             adminViewModel.addAdmin(admin)

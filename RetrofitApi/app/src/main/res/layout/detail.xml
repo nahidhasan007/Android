@@ -13,53 +13,42 @@
         android:padding="10dp"
         android:layout_margin="5dp"
         android:elevation="2dp"
-        android:background="@drawable/drawborder">
+        android:background="@drawable/border">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/Id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="12dp"
-            android:hint="Name"
+            android:hint="Id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/phone"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Phone"
-            app:layout_constraintEnd_toEndOf="@+id/name"
+            android:hint="Email"
+            app:layout_constraintEnd_toEndOf="@+id/Id"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintStart_toStartOf="@+id/Id"
+            app:layout_constraintTop_toBottomOf="@+id/Id" />
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Address"
-            app:layout_constraintEnd_toEndOf="@+id/phone"
+            android:hint="Body"
+            android:maxLines="2"
+            android:maxLength="@integer/material_motion_duration_long_1"
+            app:layout_constraintEnd_toEndOf="@+id/email"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/phone"
-            app:layout_constraintTop_toBottomOf="@+id/phone" />
-        <TextView
-            android:id="@+id/uid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:hint="id"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/address"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/address"
-            app:layout_constraintTop_toBottomOf="@+id/address"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
