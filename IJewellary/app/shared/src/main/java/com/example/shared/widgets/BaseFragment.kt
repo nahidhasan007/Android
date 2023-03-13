@@ -25,7 +25,7 @@ abstract class BaseFragment<VB : ViewDataBinding>: Fragment() {
         viewDataBinding = DataBindingUtil.inflate(inflater,layoutId,container,false)
 
         initOnCreateView()
-       // val viewModel = getViewModel()
+        val viewModel = getViewModel()
         return viewDataBinding.root
     }
     override fun onDestroyView() {
@@ -36,7 +36,7 @@ abstract class BaseFragment<VB : ViewDataBinding>: Fragment() {
     @LayoutRes
     protected abstract fun layoutId(): Int
 
-    //protected abstract fun getviewModel() : BaseViewModel?
+    protected abstract fun getViewModel() : BaseViewModel?
 
     protected abstract fun initOnCreateView()
 
