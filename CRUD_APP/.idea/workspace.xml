@@ -10,109 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eb70bb3-eea5-4bdf-a7d0-12152abf0378" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/androidTest/java/com/example/buttonclick/ExampleInstrumentedTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/java/com/example/buttonclick/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/app/src/test/java/com/example/buttonclick/ExampleUnitTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ButtonClick/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/java/com/example/weatherapplication/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/java/com/example/weatherapplication/NetworkUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/java/com/example/weatherapplication/ToyBox.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/menu/main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/app/src/test/java/com/example/weatherapplication/ExampleUnitTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WeatherApplication/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/Fragment1.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/Fragment1.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/Fragment2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/Fragment2.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/java/com/example/fragmentexample/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/fragment1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/fragment1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/fragment2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/fragment2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/layout/fragment_blank.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FragmentExample/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/model/Post.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/network/BaseRetrofitBuilder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/network/NewsApi.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/network/NewsRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/shared/ActivityUtl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/view/news/detail/NewsDetails.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/view/news/newsfeed/NewsHomeViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/view/news/newsfeed/NewsHomeViewModelFactory.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/res/layout/fragment_news_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Crud/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Crud/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RetrofitApi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RetrofitApi/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TodaysNews2/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../TodaysNews2/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TodaysNews2/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/NewsHome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/java/com/example/todaysnews/view/news/newsfeed/NewsHome.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TodaysNews2/app/src/main/res/layout/fragment_news_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/res/layout/fragment_news_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TodaysNews2/app/src/main/res/navigation/newsnav.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TodaysNews2/app/src/main/res/navigation/newsnav.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\USER.ST-SHAFAYAT\.android\avd\Pixel_5_API_31.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\USER.ST-SHAFAYAT\.android\avd\Pixel_5_API_31_2.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -130,15 +51,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER.ST-SHAFAYAT/AndroidStudioProjects/CRUD_APP&quot;
+  }
+}</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="CRUD_APP.app.main" />
@@ -189,15 +110,12 @@
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
-        <option name="PROFILING_MODE" value="NOT_SET" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
