@@ -1,6 +1,8 @@
 package com.example.messutilities.members
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.example.messutilities.R
 import com.example.messutilities.adapter.MemberAdapter
 import com.example.messutilities.databinding.FragmentMemberBinding
@@ -12,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MemberFragment : BaseFragment<FragmentMemberBinding>() {
+class MemberFragment : BaseFragment<FragmentMemberBinding>(), MemberAdapter.MemberDetails{
 
     @Inject
     lateinit var memberRepository: MemberRepository
@@ -32,9 +34,20 @@ class MemberFragment : BaseFragment<FragmentMemberBinding>() {
             val member = Members("Nahid", "+8801728242739")
             members.add(member)
         }
-        memberAdapter = MemberAdapter(members)
+        memberAdapter = MemberAdapter(members,this)
         bindingView.memberList.adapter = memberAdapter
 
+    }
+
+    override fun seeMemberDetails(members: Members) {
+       findNavController().navigate(
+           R.id.action_memberFragment_to_memberDetails,
+           bundleOf(ARG_MEMBERS to members)
+       )
+    }
+
+    companion object{
+        const val ARG_MEMBERS = "MEMBERS"
     }
 
 

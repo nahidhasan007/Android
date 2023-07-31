@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messutilities.databinding.SingleMemberItemBinding
 import com.example.messutilities.model.Members
 
-class MemberAdapter(private var members : ArrayList<Members>) :
+class MemberAdapter(private var members : ArrayList<Members>, val clickListener: MemberDetails) :
     RecyclerView.Adapter<MemberAdapter.MemberAdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberAdapterViewHolder {
@@ -17,10 +17,16 @@ class MemberAdapter(private var members : ArrayList<Members>) :
     override fun getItemCount(): Int {
         return members.size
     }
+    interface MemberDetails {
+       fun seeMemberDetails(members: Members)
+    }
 
     override fun onBindViewHolder(holder: MemberAdapterViewHolder, position: Int) {
         holder.binding.memberName.text = members[position].name
         holder.binding.phone.text = members[position].phone
+        holder.binding.details.setOnClickListener{
+            clickListener.seeMemberDetails(members[position])
+        }
     }
 
     inner class MemberAdapterViewHolder(val binding: SingleMemberItemBinding) :

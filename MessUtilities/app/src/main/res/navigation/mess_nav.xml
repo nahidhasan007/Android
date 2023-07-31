@@ -9,5 +9,14 @@
         android:id="@+id/memberFragment"
         android:name="com.example.messutilities.members.MemberFragment"
         android:label="MemberFragment"
-        tools:layout="@layout/fragment_member"/>
+        tools:layout="@layout/fragment_member">
+        <action
+            android:id="@+id/action_memberFragment_to_memberDetails"
+            app:destination="@id/memberDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberDetails"
+        android:name="com.example.messutilities.memberdetails.MemberDetails"
+        android:label="MemberDetails"
+        tools:layout="@layout/fragment_member_details"/>
 </navigation>
