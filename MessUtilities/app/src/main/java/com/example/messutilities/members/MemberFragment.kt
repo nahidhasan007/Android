@@ -31,7 +31,7 @@ class MemberFragment : BaseFragment<FragmentMemberBinding>(), MemberAdapter.Memb
     override fun initOnCreateView() {
         var members = arrayListOf<Members>()
         for (i in 0..5){
-            val member = Members("Nahid", "+8801728242739")
+            val member = Members(1,"Nahid", "+8801728242739")
             members.add(member)
         }
         memberAdapter = MemberAdapter(members,this)
