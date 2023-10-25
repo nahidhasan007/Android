@@ -8,4 +8,9 @@ object BuildRetrofit {
     fun instance() : Retrofit{
         return Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
     }
+
+    private const val DEBUG_URL = "https://jsonplaceholder.typicode.com/"
+    fun <S> createService(serviceClass : Class<S>) : S {
+        return instance().create(serviceClass)
+    }
 }
