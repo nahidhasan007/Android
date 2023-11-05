@@ -17,8 +17,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.R
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -46,6 +49,7 @@ fun CategoryItem(category: String){
         .padding(4.dp)
         .size(160.dp)
         .clip(RoundedCornerShape(8.dp))
+        .paint(painter = painterResource(id = com.example.tweety.R.drawable.ic_bg))
         .border(1.dp, Color(0xFFEEEEEE)),
         contentAlignment = Alignment.BottomCenter
     )

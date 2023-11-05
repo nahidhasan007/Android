@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.tweety.api.TweetApi
 import com.example.tweety.screens.CategoryItem
 import com.example.tweety.screens.CategoryScreen
+import com.example.tweety.screens.DetailScreen
 import com.example.tweety.ui.theme.TweetyTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -36,7 +37,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             TweetyTheme {
                 // A surface container using the 'background' color from the theme
-                CategoryScreen()
+               DetailScreen()
+//                CategoryScreen()
             }
         }
     }
