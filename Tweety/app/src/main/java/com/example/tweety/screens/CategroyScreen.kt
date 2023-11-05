@@ -1,6 +1,7 @@
 package com.example.tweety.screens
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,36 +18,38 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.R
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.tweety.network.viewmodels.CategoryViewModel
 
 @Composable
-fun CategoryScreen(){
-    val categoryViewModel : CategoryViewModel = viewModel()
-    val categories : State<List<String>> = categoryViewModel.categories.collectAsState()
+fun CategoryScreen(onClick: (category: String) -> Unit) {
+    val categoryViewModel: CategoryViewModel = hiltViewModel()
+    val categories: State<List<String>> = categoryViewModel.categories.collectAsState()
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.SpaceAround
     )
     {
-        items(categories.value){
-            CategoryItem(category = it)
+        items(categories.value) {
+            CategoryItem(category = it, onClick = onClick)
         }
     }
 }
 
 @Composable
-fun CategoryItem(category: String){
+fun CategoryItem(category: String, onClick: (category: String) -> Unit) {
     Box(modifier = Modifier
         .padding(4.dp)
+        .clickable {
+            onClick(category)
+        }
         .size(160.dp)
         .clip(RoundedCornerShape(8.dp))
         .paint(painter = painterResource(id = com.example.tweety.R.drawable.ic_bg))
@@ -60,7 +63,7 @@ fun CategoryItem(category: String){
             color = Color.Black,
             modifier = Modifier.padding(0.dp, 20.dp),
             style = MaterialTheme.typography.bodyLarge
-            )
+        )
     }
 
 }
