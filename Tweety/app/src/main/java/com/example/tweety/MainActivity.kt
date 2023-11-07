@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -19,19 +20,25 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.tweety.api.TweetApi
+import com.example.tweety.model.Tweet
+import com.example.tweety.network.viewmodels.CategoryViewModel
 import com.example.tweety.screens.CategoryItem
 import com.example.tweety.screens.CategoryScreen
 import com.example.tweety.screens.DetailScreen
+import com.example.tweety.screens.TweetScreen
 import com.example.tweety.ui.theme.TweetyTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -55,6 +62,7 @@ class MainActivity : ComponentActivity() {
 //        }
 
         setContent {
+
             TweetyTheme {
                 // A surface container using the 'background' color from the theme
 //               DetailScreen()
@@ -85,9 +93,18 @@ fun appNavigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "category"){
         composable(route = "category"){
-            CategoryScreen{
+            CategoryScreen(navController) {
                 navController.navigate("detail/${it}")
             }
+        }
+        composable(route = "tweet/{tweets}",
+            arguments = listOf(
+                navArgument("tweets"){
+                    type = NavType.StringType
+                }
+            )) {
+            val tweets = it.arguments?.getString("tweets")
+            TweetScreen(tweets)
         }
         composable(route = "detail/{category}",
             arguments = listOf(
