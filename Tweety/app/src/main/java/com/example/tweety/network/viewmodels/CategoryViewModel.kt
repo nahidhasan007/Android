@@ -22,6 +22,7 @@ class CategoryViewModel @Inject constructor(private val repo: TweetRepository) :
         viewModelScope.launch {
             repo.getCategories()
         }
+        getAllTweet()
     }
 
     fun getAllTweet(){

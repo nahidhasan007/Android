@@ -3,34 +3,69 @@ package com.example.tweety.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.tweety.model.Tweet
+import com.example.tweety.model.TweetItem
+import com.example.tweety.network.viewmodels.CategoryViewModel
 
 @Composable
-fun TweetScreen(tweets : String?) {
-    if (tweets != null) {
-        items(tweet = tweets)
+fun TweetScreen(tweets: String?) {
+
+    val categoryViewModel: CategoryViewModel = hiltViewModel()
+    val tweets: State<Tweet> = categoryViewModel.allTweets.collectAsState()
+    LazyColumn(Modifier.fillMaxWidth()) {
+        items(tweets.value.tweets) { tweet ->
+            ListItems(tweet = tweet)
+        }
     }
+
 }
 
 @Composable
-fun items(tweet: String) {
+fun ListItems(tweet: TweetItem) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
         border = BorderStroke(1.dp, Color(0xFFCCCCCC)),
         content = {
-            Text(
-                text = "Hi this is from Tweet Screen\n${tweet}",
-                modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.bodyMedium
-            )
+            tweet.category?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        top = 8.dp,
+                        end = 16.dp,
+                        bottom = 8.dp
+                    ),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            tweet.content?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        top = 0.dp,
+                        end = 16.dp,
+                        bottom = 8.dp
+
+                    ),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     )
+
 }
