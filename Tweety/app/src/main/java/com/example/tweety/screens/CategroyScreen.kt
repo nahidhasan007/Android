@@ -84,6 +84,24 @@ fun CategoryScreen(navController: NavHostController, onClick: (category: String)
                 )
 
             }
+
+            Button(
+                onClick = {
+                    val route = "test"
+                    navController.navigate(route)
+
+                }, modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(end = 8.dp)
+                    .background(color = Color.White) // Change the background color
+            ) {
+                Text(
+                    text = "See All",
+                    textAlign = TextAlign.Center,
+                    color = Color.Black
+                )
+
+            }
         }
 
     }

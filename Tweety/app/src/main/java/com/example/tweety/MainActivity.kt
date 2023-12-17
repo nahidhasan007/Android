@@ -38,6 +38,7 @@ import com.example.tweety.network.viewmodels.CategoryViewModel
 import com.example.tweety.screens.CategoryItem
 import com.example.tweety.screens.CategoryScreen
 import com.example.tweety.screens.DetailScreen
+import com.example.tweety.screens.ReissuePriceBreakDownFragment
 import com.example.tweety.screens.TweetScreen
 import com.example.tweety.ui.theme.TweetyTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,6 +97,9 @@ fun appNavigation(){
             CategoryScreen(navController) {
                 navController.navigate("detail/${it}")
             }
+        }
+        composable(route = "test"){
+            ReissuePriceBreakDownFragment()
         }
         composable(route = "tweet/{tweets}",
             arguments = listOf(
