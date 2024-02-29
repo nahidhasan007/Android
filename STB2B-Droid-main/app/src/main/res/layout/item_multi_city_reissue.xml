@@ -1,0 +1,281 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.DestinationPath" />
+
+        <variable
+            name="roundedDrawable"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.utils.RoundedShapeDrawable" />
+
+        <variable
+            name="flightNumber"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/font_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/begin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/from_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/date_change_rounded_bg"
+            android:backgroundTint="#F5F7FA"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_small"
+            app:layout_constraintBottom_toBottomOf="@id/to_layout"
+            app:layout_constraintBottom_toTopOf="@+id/to_layout"
+            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/begin_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineDividerInFromLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".17" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="#D8E1EB"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInFromLayout"
+                app:layout_constraintStart_toStartOf="@id/guidelineDividerInFromLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fromAirPortShortCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/three_hyphens"
+                android:text="@{data.origin}"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInFromLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="DAC" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/from_hint_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:hint="@string/flying_from"
+                android:lineSpacingExtra="4sp"
+                android:text="@{data.originCity}"
+                android:textColor="@color/flight_text_color_primary"
+                android:textColorHighlight="@color/flight_text_color_primary"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/guidelineDividerInFromLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/from_code_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:ellipsize="end"
+                android:hint="@string/airport"
+                android:maxLines="1"
+                android:text="@{data.originAirport}"
+                android:textColor="@color/flight_text_color_tertiary"
+                android:textColorHint="@color/flight_text_color_tertiary"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/from_hint_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/from_hint_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/to_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/date_change_rounded_bg"
+            android:backgroundTint="#F5F7FA"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_small"
+            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/from_layout"
+            app:layout_constraintBottom_toTopOf="@id/departure_date_layout"
+            >
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineDividerInToLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".17" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="#D8E1EB"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInToLayout"
+                app:layout_constraintStart_toStartOf="@id/guidelineDividerInToLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/destinationAirPortShortCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/three_hyphens"
+                android:gravity="center"
+                android:text="@{data.destination}"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInToLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="JFK" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/to_hint_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:hint="@string/flying_to"
+                android:lineSpacingExtra="4sp"
+                android:text="@{data.destinationCity}"
+                android:textColor="@color/flight_text_color_primary"
+                android:textColorHighlight="@color/flight_text_color_primary"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/guidelineDividerInToLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/to_code_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:hint="@string/airport"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.destinationAirport}"
+                android:textColor="@color/flight_text_color_tertiary"
+                android:textColorHint="@color/flight_text_color_tertiary"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintStart_toStartOf="@id/to_hint_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/to_hint_text_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/departure_date_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/holiday_rounded_card_with_stroke_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_small"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/to_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineDividerInDateLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".17" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="#D8E1EB"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInDateLayout"
+                app:layout_constraintStart_toStartOf="@id/guidelineDividerInDateLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/three_hyphens"
+                android:text="@{data.dayOfDate}"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidelineDividerInDateLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="05" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/date_hint_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:hint="@string/departure_date"
+                android:text="@{data.monthOfDate}"
+                android:textColor="@color/flight_text_color_primary"
+                android:textColorHighlight="@color/flight_text_color_primary"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/guidelineDividerInDateLayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:hint="@string/date"
+                android:text="@{data.yearOfDate}"
+                android:textColor="@color/flight_text_color_tertiary"
+                android:textColorHint="@color/flight_text_color_tertiary"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintStart_toStartOf="@id/date_hint_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/date_hint_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

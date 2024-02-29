@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.refund.flightselection.RefundFlightSelectionVM" />
+
+        <variable
+            name="refundQuotation"
+            type="net.sharetrip.b2b.view.flight.history.model.RefundQuotationResponse" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/refund_background_color">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:gravity="center"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Submit Refund Request"
+            app:subtitleTextAppearance="@dimen/spacing_medium"
+            app:subtitleCentered="true"
+            app:titleCentered="true">
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/toolbarSection"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:drawablePadding="@dimen/spacing_small"
+                android:gravity="center"
+                android:padding="@dimen/spacing_small"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_left_white_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/expiresAt"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:background="#F27D00"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarSection"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/remainingIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_timer"
+            android:textColor="@color/gray_dark"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/expiresAt"
+            app:layout_constraintEnd_toStartOf="@+id/remainingTime"
+            app:layout_constraintTop_toTopOf="@+id/expiresAt" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/remainingTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/expiresAt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/expiresAt"
+            app:layout_constraintVertical_bias="0.254"
+            tools:text="Remaining"
+            tools:visibility="visible" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/flight_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="6dp"
+            app:contentPadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/expiresAt">
+
+            <TextView
+                style="@style/TitleTextStyle"
+                android:textColor="@color/flight_text_color_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Flight Details"
+                android:drawableEnd="@drawable/right_arrow"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/passengers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="6dp"
+            app:contentPadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flight_details">
+
+            <TextView
+                style="@style/TitleTextStyle"
+                android:textColor="@color/flight_text_color_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Passengers"
+                android:drawableEnd="@drawable/right_arrow"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/refundPriceContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="6dp"
+            app:contentPadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passengers"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TitleTextStyle"
+                    android:textColor="@color/flight_text_color_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Refund Details"
+                    android:drawableEnd="@drawable/right_arrow"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
+                    android:background="@color/dark_light_2" />
+
+<!--                Refund Application Amount -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/application_amount_ll"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_application_amount"
+                        android:text="Refund Applicable Amount"
+                        android:gravity="start"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_application_amount"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+
+<!--                Airline penalty amount -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/airline_penalty_ll"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_airline_penalty"
+                        android:text="Airline Penalty"
+                        android:gravity="start"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_airline_penalty"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+                <!--                St convenience fee -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/st_convenience_fee_ll"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_st_convenience_fee"
+                        android:text="St Convenience Fee"
+                        android:gravity="start"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_st_convenience_fee"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+                <!--                total charge -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/total_charge_ll"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_total_charge"
+                        android:text="Total Charge"
+                        android:gravity="start"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_total_charge"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/due_adjustment_ll"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_due_adjustment"
+                        android:text="Due Adjustment"
+                        android:gravity="start"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_due_adjustment"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+                <!--                divider -->
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
+                    android:background="@color/dark_light_2" />
+                
+<!--                Amount to be refunded -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/amount_to_be_refunded_ll"
+                    android:layout_weight="2"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/label_amount_to_be_refunded"
+                        android:text="Amount to be Refunded"
+                        android:gravity="start"
+                        android:textStyle="bold"
+                        android:textColor="@color/flight_text_color_tertiary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                    <TextView
+                        android:id="@+id/value_amount_to_be_refunded"
+                        android:text="0 BDT"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/flight_text_color_secondary"
+                        android:textSize="@dimen/font_percent_87_5"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#3E80F8"
+            android:text="@string/get_refund"
+            android:textColor="@android:color/white"
+            android:enabled="@{!viewModel.isLoading()}"
+            android:visibility="visible"
+            app:cornerRadius="@dimen/button_radius"
+            app:layout_constraintBottom_toTopOf="@id/cancelRefund"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelRefund"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_border_primary"
+            app:backgroundTint="#E3F2FF"
+            android:text="@string/cancel_refund"
+            android:textColor="@color/primary"
+            tools:visibility="visible"
+            app:cornerRadius="@dimen/button_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="30dp"
+            android:visibility="@{viewModel.isLoading()? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

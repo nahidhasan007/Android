@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.UtilsOperationKt" />
+
+        <import type="net.sharetrip.b2b.util.ConstantsKt" />
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="segment"
+            type="net.sharetrip.b2b.view.flight.booking.model.Segment" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/light"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="24dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrow_image_view"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_plane_dark_mono"
+                    app:tint="@color/primary_variant" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text='@{segment.originCode+" - "+segment.destinationCode}'
+                    android:textColor="#235fd8"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/arrow_image_view"
+                    app:layout_constraintStart_toEndOf="@id/arrow_image_view"
+                    app:layout_constraintTop_toTopOf="@id/arrow_image_view"
+                    tools:text="DAC - DEL" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:loadImageWithTransformation="@{segment.logo}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/arrow_image_view" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/flight_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text='@{segment.airlines.shortName}'
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/flight_icon"
+                    app:layout_constraintStart_toEndOf="@id/flight_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_icon"
+                    tools:text="Malindo Air" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text='@{segment.airlinesCode+""+segment.flightNumber}'
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/flight_icon"
+                    app:layout_constraintStart_toEndOf="@id/flight_name"
+                    app:layout_constraintTop_toTopOf="@id/flight_icon"
+                    tools:text="OD163" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_takeoff_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flight_icon"
+                    app:srcCompat="@drawable/ic_flight_takeoff_24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/flight_takeoff_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@{DateUtils.INSTANCE.changeDateFormat(DateUtils.INSTANCE.YYYY_MM_DD_HH_MM_SS,DateUtils.HH_MM_MMM_DD_YYYY,segment.departureDateTime.dateTime)}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/flight_takeoff_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_takeoff_icon"
+                    tools:text="Dec 13, 2019" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:text='@{segment.originName.airport}'
+                    android:textColor="@color/dark_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/flight_takeoff_icon"
+                    app:layout_constraintTop_toBottomOf="@id/flight_takeoff_date"
+                    tools:text="Terminal 3, Dhaka, Hazrat Shahjalal International Airport" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_class_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flight_takeoff_icon"
+                    app:srcCompat="@drawable/ic_flight_seat_24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@{segment.classType}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/flight_class_icon"
+                    app:layout_constraintStart_toEndOf="@id/flight_class_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_class_icon"
+                    tools:text="Economy" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_carrier_model_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="18dp"
+                    android:tint="@color/dark_variant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flight_class_icon"
+                    app:srcCompat="@drawable/ic_plane_dark_mono" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="4sp"
+                    android:text='@{segment.aircraft}'
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/flight_carrier_model_icon"
+                    app:layout_constraintStart_toEndOf="@id/flight_carrier_model_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_carrier_model_icon"
+                    tools:text="BOEING 737-800 - 738" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_time_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flight_carrier_model_icon"
+                    app:srcCompat="@drawable/ic_outline_access_time_24" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="4sp"
+                    android:text='@{segment.duration}'
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@id/flight_time_icon"
+                    app:layout_constraintStart_toEndOf="@id/flight_time_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_time_icon"
+                    tools:text="3h 55m" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_landing_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flight_time_icon"
+                    app:srcCompat="@drawable/ic_flight_land_24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/flight_landing_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@{DateUtils.INSTANCE.changeDateFormat(DateUtils.INSTANCE.YYYY_MM_DD_HH_MM_SS,DateUtils.HH_MM_MMM_DD_YYYY,segment.arrivalDateTime.dateTime)}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/flight_landing_icon"
+                    app:layout_constraintTop_toTopOf="@id/flight_landing_icon"
+                    tools:text="Dec 13, 2019" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="4sp"
+                    android:text='@{segment.destinationName.airport}'
+                    android:textColor="@color/dark_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/flight_landing_icon"
+                    app:layout_constraintTop_toBottomOf="@id/flight_landing_date"
+                    tools:text="Terminal 3, Dhaka, Hazrat Shahjalal International Airport" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/layover_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_alice_blue"
+            android:padding="8dp"
+            android:text='@{UtilsOperationKt.getColoredString("Layover: " + segment.transitTime)}'
+            android:textColor="#000000"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            android:visibility="@{segment.transitTime == null || segment.transitTime.empty ? View.GONE : View.VISIBLE }"
+            tools:text="Layover: 5h 50m" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear_transit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_light_yellow"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:visibility="@{segment.transitText().empty?View.GONE:View.VISIBLE}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_info_image_transit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_transit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_info_mono" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_transit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:lineSpacingExtra="4sp"
+                android:text="@{segment.transitText()}"
+                android:textColor="#f57f17"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_info_image_transit"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlHardcoded"
+                tools:text="This flight contains more than 12 hours of transit, before booking this flight please check your visa requirements as per your nationality." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear_technical_stoppage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_light_yellow"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:visibility="@{segment.hiddenStop.code!=null?View.VISIBLE:View.GONE}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_info_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_technical_stoppage_explanation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_info_mono" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_technical_stoppage_explanation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:paddingBottom="2dp"
+                android:text="@{segment.hiddenStop.code!=null ?String.format(@string/technical_stoppage_explanation,segment.hiddenStop.city,segment.hiddenStop.airport,segment.hiddenStop.code):``}"
+                android:textColor="#f57f17"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_info_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Note: This flight has technical stoppage at Delhi, Indira Gandhi International Airport (DEL). Before booking this flight, please check you visa requirement as per your Nationality by mailing at flight@sharetrip.net." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

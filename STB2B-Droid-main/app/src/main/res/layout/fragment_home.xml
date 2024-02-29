@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userName"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <RelativeLayout
+                    android:id="@+id/user_info_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_normal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_user"
+                        android:layout_width="@dimen/spacing_extra_large"
+                        android:layout_height="@dimen/spacing_extra_large"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/background_label"
+                        app:srcCompat="@drawable/ic_person_white_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="32dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:text="@{userName}"
+                        android:textColor="@color/light"
+                        android:textSize="@dimen/font_medium_large"
+                        app:layout_constraintStart_toEndOf="@id/icon_user"
+                        tools:text="Jubayar" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/container_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/feature_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_small">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/flights_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_white_rounded_corner"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:drawableTint="@color/primary"
+                    android:padding="@dimen/spacing_large"
+                    android:text="@string/flights"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/font_small"
+                    android:textStyle="normal"
+                    android:textColor="@color/primary"
+                    app:drawableTopCompat="@drawable/ic_flight_40dp"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.04136253" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="btn_flights,hotels_button,bundle_button,button_tour,button_flight_tracking" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_flights"
+                    style="@style/IndigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/flights"
+                    android:textAllCaps="false"
+                    app:drawableTopCompat="@drawable/ic_flight_40dp"
+                    app:layout_constraintEnd_toStartOf="@id/hotels_button"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/hotels_button"
+                    style="@style/IndigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/hotels"
+                    android:textAllCaps="false"
+                    app:drawableTopCompat="@drawable/ic_hotel_40dp"
+                    app:layout_constraintEnd_toStartOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/btn_flights"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bundle_button"
+                    style="@style/IndigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/holiday"
+                    android:textAllCaps="false"
+                    app:drawableTopCompat="@drawable/ic_holiday_40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/button_tour"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_flights" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_tour"
+                    style="@style/IndigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/tour"
+                    android:textAllCaps="false"
+                    app:drawableTopCompat="@drawable/ic_tour_40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/button_flight_tracking"
+                    app:layout_constraintStart_toEndOf="@+id/bundle_button"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_flights" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_flight_tracking"
+                    style="@style/IndigoButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:paddingTop="@dimen/spacing_normal"
+                    android:text="@string/flight_tracker"
+                    android:textAllCaps="false"
+                    app:drawableTopCompat="@drawable/ic_flight_tracker_40dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_tour"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/button_tour"
+                    app:layout_constraintTop_toTopOf="@+id/button_tour" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.topup.ui.topup.TopUpVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/top_up_online" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
+                app:contentPadding="@dimen/spacing_normal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small">
+
+                    <include
+                        android:id="@+id/include_payment_method"
+                        layout="@layout/container_payment_gateway"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_layout_amount"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        app:boxBackgroundColor="@color/light"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_payment_method">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/payment_amount"
+                            android:imeOptions="actionDone"
+                            android:inputType="numberDecimal"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.setTotalAmount(text)}"
+                            android:textColor="@color/dark"
+                            tools:text="2000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/center_vertical_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".5" />
+
+                    <include
+                        android:id="@+id/include_gateway_charge"
+                        layout="@layout/container_label_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_amount"
+                        bind:label="@{@string/gateway_charge}"
+                        bind:text="@{viewModel.gateWay.currency.code +` `+ NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(viewModel.gateWayCharge).longValue())}" />
+
+                    <include
+                        android:id="@+id/include_conversion_rate"
+                        layout="@layout/container_label_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_amount"
+                        bind:label="@{@string/conversion_rate}"
+                        bind:text="@{viewModel.gateWay.currency.code +` `+ NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(viewModel.gateWay.currency.conversion.rate).longValue())}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/include_bottom_sheet"
+            layout="@layout/bottom_sheet_top_up" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

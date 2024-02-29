@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <import type="net.sharetrip.b2b.util.ConstantsKt" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="flightHistory"
+            type="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/center_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/flight_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@{flightHistory.flightCode}"
+                android:textColor="@color/dark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="DAC - BKK - DAC" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_flight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_booking_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/booking_id"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flight_code" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_booking_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{flightHistory.bookingCode}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/center_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/label_booking_id"
+                app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                tools:text="ST862149990131321231111321321321 " />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_travellers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/traveller_s"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_booking_id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_travellers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{flightHistory.travellersInfo}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/center_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/label_travellers"
+                app:layout_constraintTop_toBottomOf="@+id/label_booking_id"
+                tools:text="4 Adt 3 Chd" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_payment_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@{@string/payment+`:`}"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_travellers"
+                tools:text="Payment :" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_payment_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:text="@{flightHistory.paymentStatus}"
+                android:textColor="@{flightHistory.paymentStatus.equalsIgnoreCase(`paid`)?@color/light_green:@color/red}"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_payment_status"
+                app:layout_constraintEnd_toEndOf="@+id/center_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/label_payment_status"
+                tools:text="Unpaid" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_pnr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@{@string/pnr+`:`}"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/flight_code" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_pnr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{flightHistory.pnrCode}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_pnr"
+                app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                tools:text="PZZHW2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_fly_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@{@string/fly_date+`:`}"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/label_pnr" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_fly_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{flightHistory.getFlyDate()}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_fly_date"
+                app:layout_constraintTop_toBottomOf="@+id/label_pnr"
+                tools:text="09 Dec, 2020 18:15" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@{@string/status+`:`}"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/label_travellers"
+                tools:text="@string/status" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:text="@{flightHistory.bookingStatus}"
+                android:textAllCaps="true"
+                android:textColor="@color/light_green"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_status"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_status"
+                tools:text="Unpaid" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@{flightHistory.bookingCurrency+` `+NumberFormatKt.convertCurrencyToBengaliFormat(flightHistory.totalAmount.intValue())}"
+                android:textColor="@color/primary_variant"
+                android:textSize="@dimen/font_normal"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_payment_status"
+                tools:text="BDT 23,916" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

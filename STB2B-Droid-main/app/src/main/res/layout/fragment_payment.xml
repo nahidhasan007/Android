@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.topup.ui.payment.PaymentVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/payment" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing_small" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing_small" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_top_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_small"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="27dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/image_view_submitted"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="@dimen/spacing_normal"
+                            android:layout_marginTop="27dp"
+                            android:src="@drawable/ic_payment_mono"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/label_account_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:letterSpacing=".15"
+                            android:text="@string/account_balance"
+                            android:textAllCaps="true"
+                            android:textColor="@color/dark_variant"
+                            android:textSize="@dimen/font_tiny"
+                            app:layout_constraintBottom_toTopOf="@+id/text_view_account_balance"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/image_view_submitted" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_view_account_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:text="@{`৳ `+NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(viewModel.balance).longValue())}"
+                            android:textColor="@color/primary_variant"
+                            android:textSize="@dimen/font_huge"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/image_view_submitted"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/label_account_balance"
+                            tools:text="৳ 89,765" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/label_booking_message"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_huge"
+                            android:layout_marginTop="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_huge"
+                            android:gravity="center"
+                            android:text="@string/top_up_your_account"
+                            android:textColor="@color/dark_variant"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_account_balance" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_top_up_online"
+                            style="@style/customButton"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="@dimen/spacing_normal"
+                            android:text="@string/top_up_online"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/label_booking_message" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_create_payment_request"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="@dimen/spacing_huge"
+                            android:layout_marginTop="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_huge"
+                            android:background="@drawable/background_transparent_with_blue_stroke"
+                            android:text="@string/create_payment_request"
+                            android:textColor="@color/primary"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_top_up_online" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_recent_payments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_extra_large"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@string/recent_payments"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/card_view_top_up" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_all_payments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_extra_large"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/all_payments"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/card_view_top_up" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_payment_history"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/label_recent_payments"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_payment_history" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="115dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_payment_history" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/ic_home_mono_24dp"
+        android:enabled="true"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/tab_booking"
+        android:icon="@drawable/ic_bookings_mono_24dp"
+        android:title="Booking"/>
+
+    <item
+        android:id="@+id/tab_transaction"
+        android:icon="@drawable/ic_transactions_mono_24dp"
+        android:title="Transactions"/>
+
+    <item
+        android:id="@+id/tab_payment"
+        android:icon="@drawable/ic_payment_mono_24dp"
+        android:title="Payment"/>
+
+    <item
+        android:id="@+id/tab_more"
+        android:icon="@drawable/ic_more_mono_24dp"
+        android:title="More"/>
+</menu>

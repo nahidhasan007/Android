@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="childrenDob"
+            type="net.sharetrip.b2b.view.flight.booking.model.ChildrenDOB" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_birthdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_calendar"
+                android:layout_width="21dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                app:layout_constraintBottom_toBottomOf="@id/input_layout_birth_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_layout_birth_date"
+                app:srcCompat="@drawable/ic_calendar_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_birth_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                android:requiredHtmlText="@{childrenDob.title}"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_calendar"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_birth_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_down_24dp"
+                    android:focusable="false"
+                    android:inputType="text"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:text="@{childrenDob.date}"
+                    android:textColor="@color/dark"
+                    android:translationY="@dimen/spacing_tiny"
+                    tools:hint="Date of birth" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

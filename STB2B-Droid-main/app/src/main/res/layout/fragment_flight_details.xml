@@ -1,0 +1,338 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="flights"
+            type="net.sharetrip.b2b.view.flight.booking.model.Flights" />
+
+        <variable
+            name="flightSearch"
+            type="net.sharetrip.b2b.view.flight.booking.model.FlightSearch" />
+
+        <variable
+            name="priceDetails"
+            type="net.sharetrip.b2b.view.flight.history.model.PriceDetails" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/layout_bottom_margin">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_left_white_24dp"
+                    app:subtitle="@{flightSearch.toolbarSubTitle + String.format(@string/total_travellers, flightSearch.travellersInfo.totalTravellers)}"
+                    app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+                    app:subtitleTextColor="@color/light_70"
+                    app:title="@{flightSearch.toolbarTitle}"
+                    app:titleTextAppearance="@style/Toolbar.TitleText"
+                    app:titleTextColor="@color/light" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing_small" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing_small" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_top"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/background_white_round"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_currency_symbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@drawable/circle_background"
+                        android:padding="@dimen/spacing_tiny"
+                        android:src="@drawable/ic_bdt_24dp"
+                        android:tint="@color/primary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_client"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:text="@string/client"
+                        android:textColor="@color/primary"
+                        app:layout_constraintStart_toEndOf="@id/image_view_currency_symbol"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_client_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_tiny"
+                        android:fontFamily="sans-serif-medium"
+                        android:text='@{flights.currency + " " + NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(flights.originPrice).longValue())}'
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary"
+                        app:layout_constraintBottom_toBottomOf="@id/label_client"
+                        app:layout_constraintStart_toEndOf="@+id/label_client"
+                        app:layout_constraintTop_toTopOf="@id/label_client"
+                        tools:text="BDT 25,059" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_agent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/agent"
+                        android:textColor="@color/primary_variant"
+                        app:layout_constraintStart_toEndOf="@id/text_view_client_price"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_agent_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_tiny"
+                        android:fontFamily="sans-serif-medium"
+                        android:text='@{flights.currency + " " + NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(flights.finalPrice).longValue())}'
+                        android:textAllCaps="true"
+                        android:textColor="@color/primary_variant"
+                        android:textSize="@dimen/font_medium_large"
+                        app:layout_constraintBottom_toBottomOf="@id/label_client"
+                        app:layout_constraintStart_toEndOf="@+id/label_agent"
+                        app:layout_constraintTop_toTopOf="@id/label_client"
+                        tools:text="BDT 23,059" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_book_n_hold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/book_n_hold"
+                        android:textColor="@color/dark"
+                        android:textSize="@dimen/font_tiny"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/label_client"
+                        app:layout_constraintTop_toBottomOf="@+id/label_client" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_is_refundable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@{flights.isRefundable}"
+                        android:textColor="@color/dark"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_view_book_n_hold"
+                        app:layout_constraintTop_toBottomOf="@+id/label_client" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/label_info_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/background_caution_round"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_top">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        app:layout_constraintEnd_toStartOf="@+id/text_view_technical_stoppage_details"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_info_mono" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_technical_stoppage_details"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:text="@string/covid_message"
+                        android:textColor="@color/caution_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/image_view_info"
+                        app:layout_constraintTop_toTopOf="@id/image_view_info"
+                        tools:text="@string/covid_message" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_flight_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/label_info_message"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_flight_details" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_seat_n_bag"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/background_white_round"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_flight_details">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_seat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:drawableStart="@drawable/ic_flight_seat_24dp"
+                        android:drawablePadding="@dimen/spacing_tiny"
+                        android:text="@{String.format(@string/seats, flights.seatsLeft)}"
+                        android:textColor="@color/dark_variant"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="9 seats" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:drawableStart="@drawable/ic_bag_20dp"
+                        android:drawablePadding="@dimen/spacing_tiny"
+                        android:text="@{flights.weight}"
+                        android:textColor="@color/dark_variant"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_view_seat"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="20KG" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_price_breakdown"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/background_white_round"
+                    android:drawableEnd="@drawable/ic_right_mono"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/price_breakdown"
+                    android:textColor="@color/dark"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_seat_n_bag" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_baggage_policy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/bottom_sheet_background"
+                    android:drawableEnd="@drawable/ic_right_mono"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/baggage_policy"
+                    android:textColor="@color/dark"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_price_breakdown" />
+
+                <View
+                    android:id="@+id/view_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/light_variant"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_baggage_policy" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_cancellation_policy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_bottom_round"
+                    android:drawableEnd="@drawable/ic_right_mono"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/cancellation_policy"
+                    android:textColor="@color/dark"
+                    app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/view_divider" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/include_price_bottom_sheet"
+            layout="@layout/bottom_sheet_invoice"
+            bind:priceDetails="@{priceDetails}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

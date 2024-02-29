@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="paymentHistory"
+            type="net.sharetrip.b2b.view.topup.model.PaymentHistory" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:contentPadding="@dimen/spacing_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_payment_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{paymentHistory.paymentMode}"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="bKash" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="@{`BDT `+NumberFormatKt.convertCurrencyToBengaliFormat(paymentHistory.amount.longValue())}"
+                    android:textColor="@color/primary_variant"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="BDT 23,916" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_deposit_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{@string/deposit_date+`:`}"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_payment_type"
+                    tools:text="@string/deposit_date" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/total_traveler_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.API_DATE_PATTERN,paymentHistory.depositDate)}"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_deposit_date"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_payment_type"
+                    tools:text="09 Dec, 2020 18:15" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_ref"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/ref"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_deposit_date" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{paymentHistory.reference}"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_ref"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_deposit_date"
+                    tools:text="ONLINE-2074NAGAD-5FBA36F92C685" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{@string/status+`:`}"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_ref" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tex_view_status_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:setTextColor="@{paymentHistory.paymentStatus}"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/font_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_status"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_ref"
+                    tools:text="Declined" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

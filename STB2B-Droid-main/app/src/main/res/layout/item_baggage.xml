@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showWeight"
+            type="Boolean" />
+
+        <variable
+            name="baggage"
+            type="net.sharetrip.b2b.view.flight.booking.model.Baggage" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_normal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text='@{baggage.type ?? "Data not available" }'
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DAC - DEL" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_adult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_tiny"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:visibility="@{baggage.adult == null || baggage.adult.empty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_type">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult_base_fare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@string/adult_colon"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Adult:" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult_baggage_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                android:visibility="@{showWeight?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7 KG / BAG" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult_base_fare_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{baggage.adult}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7 KG / BAG" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_tiny"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:visibility="@{baggage.child == null || baggage.child.empty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/layout_adult">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_child"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@string/children_colon"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Child:" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_child_baggage_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                android:visibility="@{showWeight?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7 KG / BAG" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_child_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{baggage.child}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="15,196.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_tiny"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:visibility="@{baggage.infant == null || baggage.infant.empty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/layout_child">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@string/infant_colon"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Infant:" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infant_baggage_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                android:visibility="@{showWeight?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7 KG / BAG" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infant_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{baggage.infant}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="15,196.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

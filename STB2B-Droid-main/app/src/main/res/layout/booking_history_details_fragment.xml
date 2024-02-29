@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+<!--        <import type="net.sharetrip.b2b.widgets.DateFormatChangerKt" />-->
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.bookingdetails.BookingHistoryDetailsVM" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fbfbfb"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primary"
+                android:theme="@style/MyThemeOverlay_Toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_left_white_24dp"
+                app:title="@string/flight_history"
+                app:titleCentered="true"
+                app:subtitle="@{`Booking ID:`+ viewModel.historyResponse.bookingCode}"
+                app:subtitleTextAppearance="@style/Toolbar.TitleText"
+                app:subtitleCentered="true"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/flightBookingHistoryDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#FFFFFF"
+                app:cardCornerRadius="4dp"
+                app:contentPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:strokeColor="#1882FF"
+                app:strokeWidth="1dp"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bookingDetailsRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/begin_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="0dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/end_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="0dp" />
+
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/middle_horizontal_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="247dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/middleVerticalGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="180dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/flight_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.historyResponse.flightCode}"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="DAC-LAX-DAC" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/client_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Client: ৳` + ' ' + NumberFormatKt.convertCurrencyToBengaliFormat(viewModel.historyResponse.actualAmount.intValue())}"
+                        android:textColor="#F27D00"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_conversion_wrapHeight="71"
+                        tools:layout_conversion_wrapWidth="276"
+                        tools:text="Client: BDT 23,916" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/agent_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@{`৳ ` + NumberFormatKt.convertCurrencyToBengaliFormat(viewModel.historyResponse.totalAmount.intValue())}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/client_amount"
+                        tools:layout_conversion_wrapHeight="71"
+                        tools:layout_conversion_wrapWidth="276"
+                        tools:text="BDT 23,916" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/paid_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="#F27D00"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@{viewModel.historyResponse.paymentStatus}"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                        tools:layout_conversion_wrapHeight="71"
+                        tools:layout_conversion_wrapWidth="276"
+                        tools:text="Paid" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/issued_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:background="@color/green_700"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text='@{viewModel.historyResponse.bookingStatus}'
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/paid_text_view"
+                        app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                        tools:layout_conversion_wrapHeight="71"
+                        tools:layout_conversion_wrapWidth="276"
+                        tools:text="Issued" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/classTypeICon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/flight_takeoff_icon2"
+                        app:srcCompat="@drawable/ic_calendar_mono"
+                        tools:ignore="MissingConstraints" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/flyDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:textColor="@color/natural_black"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/classTypeICon"
+                        app:layout_constraintEnd_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintStart_toEndOf="@+id/classTypeICon"
+                        app:layout_constraintTop_toTopOf="@+id/classTypeICon"
+                        tools:layout_conversion_wrapHeight="71"
+                        tools:layout_conversion_wrapWidth="276"
+                        tools:text="30 Jun-8 jul 22" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/resPnr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="@{`Res.PNR : `+viewModel.historyResponse.pnrCode}"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/flyDate"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toStartOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toTopOf="@+id/flyDate"
+                        tools:text="Res.Pnr : 55MTXE" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/flight_takeoff_icon2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/paid_text_view"
+                        app:srcCompat="@drawable/flight_mono_ic" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tripType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:textColor="@color/natural_black"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/flight_takeoff_icon2"
+                        app:layout_constraintEnd_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintStart_toEndOf="@+id/flight_takeoff_icon2"
+                        app:layout_constraintTop_toTopOf="@+id/flight_takeoff_icon2"
+                        tools:text="Round Trip" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/bookingCode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="@{@string/ID+viewModel.historyResponse.bookingCode}"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tripType"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toTopOf="@+id/tripType"
+                        tools:text="ID:STFL008989408230" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/passengerIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/classTypeICon"
+                        app:srcCompat="@drawable/ic_watch_mono"
+                        tools:ignore="MissingConstraints" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/createdAt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN_WITH_AM_PM,viewModel.historyResponse.createdAt)}"
+                        android:textColor="@color/natural_black"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/passengerIcon"
+                        app:layout_constraintEnd_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintStart_toEndOf="@+id/passengerIcon"
+                        app:layout_constraintTop_toTopOf="@+id/passengerIcon"
+                        tools:text="25 Mar 23, 08.30 Pm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/airlinePnrNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="@{`Airline.Pnr : `+viewModel.historyResponse.airlineResCode}"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/createdAt"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toStartOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toTopOf="@+id/createdAt"
+                        tools:text="Airline PNR : 55MTXE" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/date_image_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/passengerIcon"
+                        app:srcCompat="@drawable/ic_tic_timer"
+                        tools:ignore="MissingConstraints" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/date_text_view2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN_WITH_AM_PM,viewModel.historyResponse.lastCancellationTime)}"
+                        android:textColor="@color/natural_black"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/date_image_view"
+                        app:layout_constraintEnd_toEndOf="@id/middleVerticalGuideline"
+                        app:layout_constraintStart_toEndOf="@+id/date_image_view"
+                        app:layout_constraintTop_toTopOf="@+id/date_image_view"
+                        tools:text="30 Jun 18.23 pm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/splitPnrNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="@{`Split`+`PNR : `+viewModel.historyResponse.splitPnrCode}"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/date_text_view2"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toStartOf="@id/middleVerticalGuideline"
+                        app:layout_constraintTop_toTopOf="@+id/date_text_view2"
+                        tools:text="SplitPnr- : 55MTXE" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/viewDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#F5F7FA"
+                        android:gravity="center"
+                        android:text="@string/view_details"
+                        android:textColor="#1882FF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/date_text_view2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+<!--            <View-->
+<!--                android:id="@+id/lineView"-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:background="#1882FF"-->
+<!--                android:visibility="invisible"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/historyBookingDetails"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/flightBookingHistoryDetails" />-->
+
+            <View
+                android:id="@+id/lineView"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:background="@color/primary"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/historyBookingDetails"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flightBookingHistoryDetails" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/historyBookingDetails"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flightBookingHistoryDetails"
+                tools:listitem="@layout/item_booking_history_details" />
+
+<!--            <androidx.constraintlayout.widget.Guideline-->
+<!--                android:id="@+id/guideline"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintGuide_percent="0.5" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

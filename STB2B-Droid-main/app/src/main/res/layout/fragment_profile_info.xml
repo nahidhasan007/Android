@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userProfile"
+            type="net.sharetrip.b2b.view.authentication.model.UserProfile" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/profile_info" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/begin_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_normal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_normal" />
+
+        <include
+            android:id="@+id/include_user_name"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            bind:icon="@{@drawable/ic_person_24dp}"
+            bind:subTitle="@{userProfile.username}"
+            bind:title="@{@string/userName}" />
+
+        <include
+            android:id="@+id/include_contact_email"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_user_name"
+            bind:icon="@{@drawable/ic_mail_outline_gray_24dp}"
+            bind:subTitle="@{userProfile.email}"
+            bind:title="@{@string/contact_email}" />
+
+        <include
+            android:id="@+id/include_company_name"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_contact_email"
+            bind:icon="@{@drawable/ic_info_mono}"
+            bind:subTitle="@{}"
+            bind:title="@{@string/company_name}" />
+
+        <include
+            android:id="@+id/include_member_since"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_company_name"
+            bind:icon="@{@drawable/ic_person_24dp}"
+            bind:subTitle="@{}"
+            bind:title="@{@string/member_since}" />
+
+        <include
+            android:id="@+id/include_status"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_member_since"
+            bind:icon="@{@drawable/ic_info_mono}"
+            bind:subTitle="@{}"
+            bind:title="@{@string/status}" />
+
+        <include
+            android:id="@+id/include_created_by"
+            layout="@layout/container_image_with_title_and_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_status"
+            bind:icon="@{@drawable/ic_person_24dp}"
+            bind:subTitle="@{}"
+            bind:title="@{@string/created_by}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

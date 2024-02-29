@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="price"
+            type="net.sharetrip.b2b.view.flight.booking.model.PriceBreakdown" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_adult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{price.type.substring(0, 1).toUpperCase() + price.type.substring(1).toLowerCase() +` x `+price.numberPaxes}"
+            android:textAllCaps="false"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ADULT x 2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_base_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{String.format(@string/base_fare_quantity, price.numberPaxes)}"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_count"
+            tools:text="Base Fare x 2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_base_fare_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{`` + NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(price.baseFare * price.numberPaxes).longValue())}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_count"
+            tools:text="21,274.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{String.format(@string/tax_quantity, price.numberPaxes)}"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_base_fare"
+            tools:text="Tax x 2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_tax_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{`` + NumberFormatKt.convertCurrencyToBengaliFormat(Double.valueOf(price.tax * price.numberPaxes).longValue())}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_base_fare"
+            tools:text="15,196.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

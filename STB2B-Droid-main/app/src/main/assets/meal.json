@@ -1,0 +1,30 @@
+[
+  {
+    "code": "",
+    "name": "Any"
+  },
+  {
+    "code": "AVML",
+    "name": "ASIAN VEGETARIAN MEAL"
+  },
+  {
+    "code": "BBML",
+    "name": "INFANT/BABY FOOD"
+  },
+  {
+    "code": "CHML",
+    "name": "CHILD MEAL"
+  },
+  {
+    "code": "DBML",
+    "name": "DIABETIC MEAL"
+  },
+  {
+    "code": "SFML",
+    "name": "SEA FOOD MEAL"
+  },
+  {
+    "code": "MOML",
+    "name": "MOSLEM MEAL"
+  }
+]

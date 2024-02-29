@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#1882FF</color>
+    <color name="primary_variant">#235FD8</color>
+    <color name="primary_light">#BBDDFF</color>
+
+    <color name="secondary">#FF5A00</color>
+    <color name="secondary_variant">#E64C00</color>
+    <color name="secondary_light">#FFCCB8</color>
+
+    <color name="accent">#444DB4</color>
+    <color name="accent_variant">#2E3192</color>
+    <color name="accent_light">#C6C9E9</color>
+
+    <color name="dark">#000000</color>
+    <color name="dark_black">#5A6573</color>
+    <color name="dark_variant">#4C4C4C</color>
+    <color name="dark_light">#8E8E93</color>
+
+    <color name="gray">#C7C7CC</color>
+    <color name="gray_variant">#D1D1D6</color>
+    <color name="gray_light">#E5E5EA</color>
+    <color name="gray_light_second">#E5E5E5</color>
+    <color name="pale_grey">#efeff4</color>
+    <color name="stone_grey">#808285</color>
+
+    <color name="light">#FFFFFF</color>
+    <color name="light_variant">#FAFAFA</color>
+    <color name="light_light">#F5F5F5</color>
+    <color name="light_90">#E6FFFFFF</color>
+    <color name="light_70">#B3FFFFFF</color>
+    <color name="light_grey">#F5F5F5</color>
+
+    <color name="flight_landing_body">#1f71eb</color>
+    <color name="light_30">#4DFFFFFF</color>
+    <color name="clear_blue">#1882ff</color>
+    <color name="greyish_brown">#4c4c4c</color>
+    <color name="caution_variant">#F57F17</color>
+    <color name="alice_blue">#E3F2FF</color>
+
+    <color name="indigo">#665eff</color>
+    <color name="indigoAlpha">#7c4dff</color>
+    <color name="blackOverlay">#66000000</color>
+    <color name="background_color">#EFEFF4</color>
+    <color name="light_green">#43A046</color>
+    <color name="red">#DE1921</color>
+    <color name="error_main">#FF3326</color>
+    <color name="info_main">#00C5F5</color>
+    <color name="caution_main">#F9A825</color>
+    <color name="orange">#dd2c00</color>
+    <color name="main_text_color">#3E4957</color>
+    <color name="flight_text_color_primary">#1A2B3D</color>
+    <color name="flight_text_color_secondary">#3E4957</color>
+    <color name="flight_text_color_tertiary">#5A6573</color>
+    <color name="colorPrimaryAlpha">#5bb4ff</color>
+    <color name="gray_300">#e4e7e9</color>
+    <color name="gray_800">#4c4c4c</color>
+    <color name="gray_dark">#de000000</color>
+    <color name="amberAlpha">#ffcc00</color>
+    <color name="windowBackground">#ffffff</color>
+    <color name="amber">#f57f17</color>
+    <color name="blue_gray">#8e8e93</color>
+    <color name="colorPrimary">@color/primary</color>
+    <color name="surface_color">#fafafa</color>
+    <color name="white">#FFFFFF</color>
+    <color name="mid_green">#43a046</color>
+    <color name="black">#000000</color>
+    <color name="example_4_grey_past">#BEBEBE</color>
+    <color name="green_700">#43a046</color>
+    <color name="example_7_yellow">#f9a825</color>
+    <color name="red_800">#ff3326</color>
+    <color name="red_reissue">#EF5550</color>
+    <color name="discount_color">#ff6c00</color>
+    <color name="dark_light_2">#F1F1F5</color>
+    <color name="natural_black">#3E4957</color>
+    <color name="refund_background_color">#F0EFF4</color>
+</resources>

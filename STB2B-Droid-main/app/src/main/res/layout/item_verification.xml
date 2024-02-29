@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.R" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="passenger"
+            type="net.sharetrip.b2b.view.flight.booking.model.Passenger" />
+
+        <variable
+            name="isDomestic"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_adult_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_extra_large"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@{passenger.id}"
+            android:textColor="@color/dark"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="Adult 1" />
+
+        <!--r1 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_adult_number">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_person"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/spacing_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_person_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_full_name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="@string/full_name_title"
+                android:textColor="@color/dark_variant"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/icon_person"
+                app:layout_constraintTop_toTopOf="@+id/icon_person" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_full_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@{passenger.firstName + ' ' + passenger.lastName}"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/label_full_name_title"
+                app:layout_constraintTop_toBottomOf="@+id/label_full_name_title"
+                tool:text="Zaheen" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r1 end-->
+
+        <!--r2 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_gender_and_dob"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_name">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_gender"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_male_32dp"
+                        app:tint="@color/dark_variant" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_gender_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/gender_title"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_gender"
+                        app:layout_constraintTop_toTopOf="@+id/icon_gender" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_gender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.gender}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_gender_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_gender_title"
+                        tool:text="Male" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_calender"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_calendar_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_dob_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/date_of_birth"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_calender"
+                        app:layout_constraintTop_toTopOf="@+id/icon_calender" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_calender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.dateOfBirth}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_dob_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_dob_title"
+                        tool:text="2020-01-01" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r2 end-->
+
+        <!--r3 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_passport_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="@{isDomestic?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_gender_and_dob">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_passport_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_passport"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_visa_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_passport_number_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/passport_number"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_passport"
+                        app:layout_constraintTop_toTopOf="@+id/icon_passport" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_passport"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.passportNumber}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_passport_number_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_passport_number_title"
+                        tool:text="BD123456dfgdgfgdfg" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_passport_expire_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_passport_expire"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_time_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_passport_expire_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/passport_expire_date"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_passport_expire"
+                        app:layout_constraintTop_toTopOf="@+id/icon_passport_expire" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_passport_expire"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.passportExpireDate}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_passport_expire_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_passport_expire_title"
+                        tool:text="01-01-1998" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r3 end-->
+
+        <!--r4 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_nationality_and_ffn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_passport_info">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_nationality"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_location"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_place_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_nationality_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/nationality"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_location"
+                        app:layout_constraintTop_toTopOf="@+id/icon_location" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_nationality"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.nationality}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_nationality_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_nationality_title"
+                        tool:text="Bangladeshi" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_ffn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_plane"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_flight_flying_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_ffn_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="@string/ffn"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/icon_plane"
+                        app:layout_constraintTop_toTopOf="@+id/icon_plane" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_ffn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{passenger.frequentFlyerNumber}"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/label_ffn_title"
+                        app:layout_constraintTop_toBottomOf="@+id/label_ffn_title"
+                        tool:text="1234567890" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r4 end-->
+
+        <!--r5 start-->
+        <LinearLayout
+            android:id="@+id/layout_seat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/layout_nationality_and_ffn">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                app:layout_constraintTop_toBottomOf="@+id/layout_nationality_and_ffn">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_seat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_flight_seat_24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_seat_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="@string/seat"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_seat"
+                    app:layout_constraintTop_toTopOf="@+id/icon_seat" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_seat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@{passenger.seatPreference.empty?`Any`:passenger.seatPreference}"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/label_seat_title"
+                    app:layout_constraintTop_toBottomOf="@+id/label_seat_title"
+                    tool:text="Window Seat" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_e_ticket"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:visibility="@{passenger.eticket==null?View.GONE:View.VISIBLE}">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_e_ticket"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_bookings_black_24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_e_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="@string/e_ticket"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/icon_e_ticket"
+                    app:layout_constraintTop_toTopOf="@+id/icon_e_ticket" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_e_ticket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@{passenger.eticket}"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/label_e_ticket"
+                    app:layout_constraintTop_toBottomOf="@+id/label_e_ticket"
+                    tool:text="1234567890" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+        <!--r5 end-->
+
+        <!--r6 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_passport_and_visa_copy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{isDomestic?View.GONE:View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/layout_seat">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_passport_copy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_passport_copy_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passport_copy"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_passport_copy"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:loadImageBinder="@{passenger.passportCopy}"
+                        android:placeholder="@{R.drawable.ic_placeholder_image_view_156dp}"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/label_passport_copy_title"
+                        app:srcCompat="@drawable/ic_placeholder_image_view_156dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_visa_copy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_visa_copy_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/visa_copy"
+                        android:textColor="@color/dark_variant"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_visa_copy"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:loadImageBinder="@{passenger.visaCopy}"
+                        android:placeholder="@{R.drawable.ic_placeholder_image_view_156dp}"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/label_visa_copy_title"
+                        app:srcCompat="@drawable/ic_placeholder_image_view_156dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r6 end-->
+
+        <!--r7 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_meal_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_passport_and_visa_copy">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_meal"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/spacing_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_meal_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_meal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="@string/selected_meal_type"
+                android:textColor="@color/dark_variant"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/icon_meal"
+                app:layout_constraintTop_toTopOf="@+id/icon_meal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_meal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@{passenger.mealPreference.empty?`Any`:passenger.mealPreference}"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/label_meal_title"
+                app:layout_constraintTop_toBottomOf="@+id/label_meal_title"
+                tool:text="Diebetic Meal (DBML)" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r7 end-->
+
+        <!--r8 start-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_request_wheelchair"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_meal_type">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_wheel_chair"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/spacing_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_wheel_chare_20dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_wheel_chair_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="@string/request_wheelchair"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="@+id/icon_wheel_chair"
+                app:layout_constraintTop_toTopOf="@+id/icon_wheel_chair" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_wheel_chair"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@{passenger.wheelChair.empty?`Any`:passenger.wheelChair}"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/label_wheel_chair_title"
+                app:layout_constraintTop_toBottomOf="@+id/label_wheel_chair_title"
+                tool:text="Doctor's Advice" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--r8 end-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

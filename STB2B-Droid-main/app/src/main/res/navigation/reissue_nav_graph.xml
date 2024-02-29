@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reissue_nav_graph"
+    app:startDestination="@id/travellerSelectionFragment">
+
+    <fragment
+        android:id="@+id/travellerSelectionFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.travellerselection.TravellerSelectionFragment"
+        android:label="@string/traveller_selection"
+        tools:layout="@layout/fragment_traveller_selection" >
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/reissueFlightSelectionFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.flightselection.ReissueFlightSelectionFragment"
+        android:label="@string/flight_selection"
+        tools:layout="@layout/fragment_reissue_flight_selection"
+        />
+
+    <fragment
+        android:id="@+id/reissueFlightSearchFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.multicity.MultiCityFragment"
+        android:label="@string/flight_search"
+        tools:layout="@layout/reissue_flight_search_layout" >
+        <action
+            android:id="@+id/action_reissueFlightSearchFragment_to_flightListFragment2"
+            app:destination="@id/flightListFragment2" />
+
+        <action
+            android:id="@+id/action_reissueFlightSearchFragment_to_singleDateCalendarFragment2"
+            app:destination="@id/singleDateCalendarFragment2" />
+        <action
+            android:id="@+id/action_reissueFlightSearchFragment_to_searchAirportFragment"
+            app:destination="@id/searchAirportFragment" />
+
+        <action
+            android:id="@+id/action_reissueFlightSearchFragment_to_travellerNumberFragment2"
+            app:destination="@id/travellerNumberFragment2" />
+        <action
+            android:id="@+id/action_reissueFlightSearchFragment_to_dateChangePolicy"
+            app:destination="@id/dateChangePolicy" />
+        <!--
+        todo: import later
+            -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/singleDateCalendarFragment2"
+        android:name="net.sharetrip.b2b.view.flight.history.singledatecalendar.SingleDateCalendarFragment"
+        android:label="@string/pick_date"
+        tools:layout="@layout/fragment_single_calendar">
+        <argument
+            android:name="ARG_CALENDER_DATA"
+            app:argType="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.CalenderData" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchAirportFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.searchairport.SearchAirportFragment"
+        android:label="@string/search_airport"
+        tools:layout="@layout/fragment_search_airport">
+        <argument
+            android:name="ARG_FLIGHT_SEARCH_TITLE_TEXT"
+            app:argType="string" />
+    </fragment>
+    <!--
+    todo: import later
+
+    -->
+    <fragment
+        android:id="@+id/flightListFragment2"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.flightlist.FlightListFragment"
+        android:label="Flight List"
+        tools:layout="@layout/fragment_reissue_flight_list">
+        <argument
+            android:name="ARG_FLIGHT_LIST_DATA"
+            app:argType="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.ReissueFlightSearch" />
+
+        <action
+            android:id="@+id/action_flightListFragment2_to_flightDetailsFragment2"
+            app:destination="@+id/flightDetailsFragment2"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flightDetailsFragment2"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.flightdetails.ReissueFlightDetailsFragment"
+        android:label="@string/flight_details"
+        tools:layout="@layout/fragment_reissue_flight_details"
+        >
+        <action
+            android:id="@+id/action_flightDetailsFragment2_to_PriceBreakDownFragment2"
+            app:destination="@+id/price_breakdown_fragment"
+            />
+        <action
+            android:id="@+id/action_flightDetailsFragment2_to_reissueManualQuotationFragment"
+            app:destination="@id/reissueManualQuotationFragment" />
+    </fragment>
+
+    <fragment
+
+        android:id="@+id/price_breakdown_fragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.pricebreakdown.ReissuePriceBreakDownFragment"
+        android:label="@string/flight_price_breakdown"
+        tools:layout="@layout/layout_price_breakdown"
+        >
+    </fragment>
+
+    <fragment
+        android:id="@+id/travellerNumberFragment2"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.travellernumber.TravellerNumberFragment"
+        android:label="TravellerNumberFragment"
+        tools:layout="@layout/fragment_reissue_cabin"/>
+    <fragment
+        android:id="@+id/reissueManualQuotationFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.manualquotation.ReissueManualQuotationFragment"
+        android:label="ReissueManualQuotationFragment"
+        tools:layout="@layout/reissue_manual_quotation"/>
+    <fragment
+        android:id="@+id/dateChangePolicy"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.datechangepolicy.DateChangePolicy"
+        android:label="Date Change Policy"
+        tools:layout="@layout/date_change_policy"/>
+    <!-- todo: import later
+        -->
+
+    <!--
+
+    <fragment
+        android:id="@+id/reissueFlightSelectionFragment"
+        android:name="net.sharetrip.flight.history.view.reissue.flightselection.ReissueFlightSelectionFragment"
+        android:label="@string/flight_selection"
+        tools:layout="@layout/fragment_reissue_flight_selection" />
+
+    <fragment
+        android:id="@+id/flightDetailsFragment2"
+        android:name="net.sharetrip.flight.history.view.reissue.flightdetails.FlightDetailsFragment"
+        android:label="Flight Details"
+        tools:layout="@layout/fragment_reissue_flight_details">
+        <action
+            android:id="@+id/action_flightDetailsFragment2_to_fragmentSegment2"
+            app:destination="@id/fragmentSegment2" />
+        <action
+            android:id="@+id/action_flightDetailsFragment2_to_refundPolicyRules"
+            app:destination="@id/refundPolicyRules" />
+        <action
+            android:id="@+id/action_flightDetailsFragment2_to_baggageFragment"
+            app:destination="@id/baggageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSegment2"
+        android:name="net.sharetrip.flight.history.view.reissue.segment.FragmentSegment"
+        android:label="@string/segment_details"
+        tools:layout="@layout/fragment_segment_reissue_layout"/>
+
+    <include app:graph="@navigation/payment_nav_graph" />
+    <fragment
+        android:id="@+id/refundPolicyRules"
+        android:name="net.sharetrip.flight.history.view.reissue.farerules.RefundPolicyRules"
+        android:label="@string/refund_policy_rules"
+        tools:layout="@layout/fragment_refund_policy_rules" />
+    <fragment
+        android:id="@+id/baggageFragment"
+        android:name="net.sharetrip.flight.history.view.reissue.farerules.BaggageFragment"
+        android:label="@string/baggage"
+        tools:layout="@layout/fragment_baggage">
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFlightHome"
+        android:name="net.sharetrip.flight.booking.view.flighthome.FragmentFlightHome"
+        android:label="FragmentFlightHome"
+        tools:layout="@layout/flight_home"/>
+
+-->
+</navigation>

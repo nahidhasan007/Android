@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="mailDetailsViewModel"
+            type="net.sharetrip.b2b.view.flight.booking.ui.maildetails.MailDetailsVM" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_email_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_left_white_24dp"
+                app:title="@string/mail_details"
+                app:titleTextColor="@color/light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_recipient"
+                style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_recipient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/recipient"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:text="@={mailDetailsViewModel.mailDetails.recipent}"
+                    android:textColor="@color/dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_cc"
+                style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_recipient">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_cc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cc"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:text="@={mailDetailsViewModel.mailDetails.cc}"
+                    android:textColor="@color/dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_bc"
+                style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_cc">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_bc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bc"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:imeOptions="actionNext"
+                    android:text="@={mailDetailsViewModel.mailDetails.bcc}"
+                    android:textColor="@color/dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_subject"
+                style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_bc">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/subject"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:imeOptions="actionNext"
+                    android:text="@={mailDetailsViewModel.mailDetails.subject}"
+                    android:textColor="@color/dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_message_body"
+                style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginEnd="@dimen/spacing_extra_large"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_subject">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/message_body"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:imeOptions="actionDone"
+                    android:text="@={mailDetailsViewModel.mailDetails.messageBody}"
+                    android:textColor="@color/dark" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_send"
+                style="@style/customButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height_normal"
+                android:layout_marginStart="@dimen/spacing_extra_large"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:onClick="@{() -> mailDetailsViewModel.onSendButtonClick()}"
+                android:text="@string/send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_message_body" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/button_discard"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height_normal"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:background="@drawable/background_transparent_with_blue_stroke"
+                android:gravity="center"
+                android:onClick="@{() -> mailDetailsViewModel.onDiscardButtonClick()}"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingEnd="@dimen/spacing_normal"
+                android:text="@string/discard"
+                android:textColor="@color/primary_variant"
+                app:layout_constraintBottom_toBottomOf="@id/button_send"
+                app:layout_constraintStart_toEndOf="@+id/button_send"
+                app:layout_constraintTop_toTopOf="@id/button_send"
+                app:textAllCaps="true" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clickable="true"
+                android:visibility="@{mailDetailsViewModel.dataLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/primary"
+                    android:indeterminateTintMode="src_atop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

@@ -1,0 +1,94 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="net.sharetrip.ui.payment.fragment.paymentstatus.Failure"
+        tools:ignore="ContentDescription">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/icon_cross"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@drawable/cross_ic"
+            android:textColor="@android:color/black"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@id/success_img_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.959"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.473"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <FrameLayout
+            android:id="@+id/actual_cross"
+            app:layout_constraintTop_toTopOf="@id/icon_cross"
+            app:layout_constraintBottom_toBottomOf="@id/icon_cross"
+            app:layout_constraintStart_toStartOf="@id/icon_cross"
+            app:layout_constraintEnd_toEndOf="@id/icon_cross"
+            android:layout_width="32dp"
+            android:layout_height="23dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/success_img_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_cross"
+            app:srcCompat="@drawable/success_sign" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/successTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:elevation="30dp"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimary"
+            android:text="@string/success"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/spacing_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/success_img_view"
+            tools:layout_editor_absoluteY="667dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/goToHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:elevation="30dp"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimary"
+            android:text="@string/your_reissue_request_has_been_submitted_successfully_it_will_come_into_effect_very_soon"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_normal"
+            app:cornerRadius="@dimen/spacing_normal"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/successTxt" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="347dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.historydetails.FlightHistoryDetailsVM" />
+
+        <variable
+            name="flightHistory"
+            type="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+
+        <variable
+            name="modifyHistory"
+            type="net.sharetrip.b2b.view.flight.history.model.ModifyHistory" />
+        />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="8dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/passengerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/dark"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Nahid Hasan" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/passengerType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/dark_black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/passengerName"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Adult" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing_extra_large" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing_extra_large" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/center_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.38" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/DobText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:text="@string/date_of_birth"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/passengerName" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dateOfBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_of_birth"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/DobText"
+                    tools:text="15 Dec, 1994" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/phoneNoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/phone_number_only"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/eTicketText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mobileNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/phoneNoText"
+                    tools:text="01821661928" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/emailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/email"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneNoText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/emailText"
+                    tools:text="nahid@sharetrip.net" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/eTicketText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/e_ticket"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/DobText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/eTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/eTicketText"
+                    tools:text="23354wcd" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/emdTicketText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/emdticket"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/emailText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/emdTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/emdTicketText"
+                    tools:text="23354wcd" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/passportText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/passport"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/emdTicketText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/passportNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_variant"
+                    android:textSize="@dimen/font_tiny"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/passportText"
+                    tools:text="BG 12345678" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="option"
+            type="String" />
+    </data>
+
+    <net.sharetrip.b2b.widgets.SelectionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tool="http://schemas.android.com/tools"
+        android:id="@+id/btn_selection"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:drawablePadding="@dimen/spacing_small"
+        android:background="@android:color/transparent"
+        android:gravity="start|center_vertical"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:textAllCaps="false"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:textColor="@color/dark"
+        android:text="@{option}"
+        tool:text="Economy" />
+
+</layout>

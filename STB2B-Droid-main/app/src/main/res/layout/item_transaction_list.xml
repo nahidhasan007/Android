@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="java.text.NumberFormat" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.util.Locale" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="transaction"
+            type="net.sharetrip.b2b.view.transaction.view.transactionlist.TransactionUIItemData" />
+        
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/center_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/debit_credit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@{transaction.isDebitOrCredit}"
+                    tools:text="Credit" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{`BDT ` + NumberFormatKt.convertCurrencyToBengaliFormat(transaction.amount.longValue())}"
+                    android:textAlignment="textEnd"
+                    android:setAmountTextColor="@{transaction.isDebit}"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/debit_credit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="BDT 2,059" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_payment_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/debit_credit"
+                    android:text="@string/payment_type_with_colon"
+                    android:textStyle="normal"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_payment_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_payment_type"
+                    app:layout_constraintTop_toBottomOf="@+id/debit_credit"
+                    android:text="@{transaction.type}"
+                    tools:text="Flight Booking" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_reference"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_payment_type"
+                    android:text="@string/ref" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_reference"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_reference"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_payment_type"
+                    android:text="@{transaction.reference}"
+                    tools:text="ONLINE-2074NAGAD-5FBA36F92C2685" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_status"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_status"
+                    android:text="@string/status_with_colon" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:setTextColor="@{transaction.status}"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/label_status"
+                    app:layout_constraintTop_toBottomOf="@+id/label_reference"
+                    android:text="@{transaction.status}"
+                    tools:text="Approved" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_created_at"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_status"
+                    app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_status"
+                    android:text="@string/created" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/created_at"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_created_at"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_created_at"
+                    android:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.DISPLAY_DATE_AND_TIME_PATTERN,transaction.created_at)}"
+                    tools:text="09 Dec, 2020  18:15" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

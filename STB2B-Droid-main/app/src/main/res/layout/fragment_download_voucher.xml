@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.downloadvowcher.DownloadVoucherVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/download_voucher" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_select_options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:text="@string/select_options"
+                    android:textColor="@color/dark"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_box_hide_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small_medium"
+                    android:background="@drawable/background_white_round"
+                    android:button="@null"
+                    android:checked='@={viewModel.downloadVoucher.hidePrice}'
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/spacing_normal"
+                    android:text="@string/hide_price_information"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    app:drawableEndCompat="?android:attr/listChoiceIndicatorMultiple"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_select_options" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_box_company_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small_medium"
+                    android:background="@drawable/background_white_round"
+                    android:button="@null"
+                    android:checked='@={viewModel.downloadVoucher.attachCompany}'
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/spacing_normal"
+                    android:text="@string/attach_company_information"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    app:drawableEndCompat="?android:attr/listChoiceIndicatorMultiple"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/check_box_hide_price" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_box_total_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small_medium"
+                    android:background="@drawable/background_white_round"
+                    android:button="@null"
+                    android:checked='@={viewModel.downloadVoucher.showTotalPrice}'
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/spacing_normal"
+                    android:text="@string/show_total_price_only"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    app:drawableEndCompat="?android:attr/listChoiceIndicatorMultiple"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/check_box_company_info" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_box_apply_custom_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small_medium"
+                    android:background="@drawable/background_white_round"
+                    android:button="@null"
+                    android:checked='@={viewModel.downloadVoucher.applyCustomPricing}'
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/spacing_normal"
+                    android:text="@string/apply_custom_pricing"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    app:drawableEndCompat="?android:attr/listChoiceIndicatorMultiple"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/check_box_total_price" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_download_voucher"
+                    app:layout_constraintTop_toBottomOf="@+id/check_box_apply_custom_price">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view_custom_pricing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/text_view_custom_pricing"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_normal"
+                                android:layout_marginTop="@dimen/spacing_normal"
+                                android:paddingBottom="@dimen/spacing_medium"
+                                android:text="@string/custom_pricing"
+                                android:textColor="@color/dark"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler_custom_pricing"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_normal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintTop_toBottomOf="@+id/text_view_custom_pricing"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/item_custom_price" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_total_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:background="@drawable/background_white_round"
+                        app:layout_constraintTop_toBottomOf="@+id/card_view_custom_pricing">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_view_passenger_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_normal"
+                            android:text="@string/total_price"
+                            android:textColor="@color/dark"
+                            android:textSize="@dimen/font_small"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_view_total_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:padding="@dimen/spacing_normal"
+                            android:text="@{``+NumberFormat.getInstance(Locale.US).format(Double.valueOf(viewModel.totalPrice))}"
+                            android:textColor="@color/dark"
+                            android:textSize="@dimen/font_small"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_download_voucher"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="@dimen/spacing_extra_large"
+                    android:background="@color/primary"
+                    android:gravity="center"
+                    android:text="@string/prepare_pdf"
+                    android:textColor="@color/light"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

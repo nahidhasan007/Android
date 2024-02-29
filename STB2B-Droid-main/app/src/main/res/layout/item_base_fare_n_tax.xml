@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.text.NumberFormat" />
+        <import type="net.sharetrip.b2b.util.NumberFormatKt" />
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="totalTraveller"
+            type="Integer" />
+
+        <variable
+            name="totalBaseFare"
+            type="Double" />
+
+        <variable
+            name="totalTax"
+            type="Double" />
+
+        <variable
+            name="totalAIT"
+            type="Double" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_adult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_base_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{String.format(@string/total_base, totalTraveller)}"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Total Base x 2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_base_fare_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{NumberFormatKt.convertCurrencyToBengaliFormat(totalBaseFare.intValue())}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_adult_base_fare"
+            tools:text="21,274.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{String.format(@string/total_tax, totalTraveller)}"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_base_fare"
+            tools:text="Total Tax x 2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_adult_tax_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@{NumberFormatKt.convertCurrencyToBengaliFormat(totalTax.intValue())}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_base_fare"
+            tools:text="15,196.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_advance_income_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_tiny"
+            android:text="@string/advance_income_tax"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_adult_tax"
+            tools:text="@string/advance_income_tax" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_advance_income_tax_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_tiny"
+            android:text='@{NumberFormatKt.convertCurrencyToBengaliFormat(totalAIT.intValue())}'
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/label_advance_income_tax"
+            tools:text="21,274.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

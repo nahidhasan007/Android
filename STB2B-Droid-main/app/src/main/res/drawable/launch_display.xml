@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@color/primary" />
+    <item
+        android:drawable="@drawable/ic_top_left_fly"
+        android:gravity="top|left"
+        android:top="@dimen/spacing_huge" />
+    <item
+        android:drawable="@drawable/ic_top_right_fly"
+        android:gravity="top|right"
+        android:top="@dimen/spacing_huge" />
+    <item
+        android:drawable="@drawable/ic_logo_b2b_206dp"
+        android:gravity="center" />
+    <item
+        android:drawable="@drawable/ic_bottom_cities"
+        android:gravity="bottom|center"
+        android:bottom="@dimen/spacing_huge" />
+</layer-list>

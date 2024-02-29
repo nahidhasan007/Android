@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+
+    <entry>
+        <key>android_b2b_app_version</key>
+        <value>1.0.6</value>
+    </entry>
+
+    <entry>
+        <key>android_b2b_code_version</key>
+        <value>16</value>
+    </entry>
+
+    <entry>
+        <key>b2b_flight_banner_image_url</key>
+        <value>""</value>
+    </entry>
+</defaultsMap>

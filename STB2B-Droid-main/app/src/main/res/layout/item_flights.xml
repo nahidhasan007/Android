@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="@dimen/spacing_tiny">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacing_normal">
+
+            <LinearLayout
+                android:id="@+id/layout_flight_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/grossFare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:text="Gross fare"
+                android:textColor="@color/primary_variant"
+                android:textSize="@dimen/font_tiny"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_fare_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="@id/layout_flight_container"
+                app:layout_constraintTop_toBottomOf="@id/layout_flight_container" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_book_hold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:text="@string/book_n_hold"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                app:drawableStartCompat="@drawable/ic_bookings_mono"
+                app:layout_constraintStart_toStartOf="@+id/layout_flight_container"
+                app:layout_constraintTop_toBottomOf="@id/grossFare" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_is_refundable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                app:drawableStartCompat="@drawable/ic_refundable_mono"
+                app:layout_constraintStart_toEndOf="@+id/text_view_book_hold"
+                app:layout_constraintTop_toTopOf="@id/text_view_book_hold"
+                tools:text="Non-refundable" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_variant"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_is_refundable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_view_is_refundable"
+                app:layout_constraintTop_toTopOf="@+id/text_view_is_refundable"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="BDT 25,059" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:padding="@dimen/spacing_tiny"
+                android:visibility="gone"
+                android:text="@string/client"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="@+id/text_view_book_hold"
+                app:layout_constraintTop_toBottomOf="@id/text_view_book_hold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_client_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_tiny"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                android:visibility="gone"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/label_client"
+                app:layout_constraintStart_toEndOf="@id/label_client"
+                app:layout_constraintTop_toTopOf="@id/label_client"
+                tools:text="BDT 25,059" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_agent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:visibility="gone"
+                android:padding="@dimen/spacing_tiny"
+                android:text="@string/agent"
+                android:textColor="@color/primary_variant"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toEndOf="@+id/text_view_client_amount"
+                app:layout_constraintTop_toBottomOf="@id/text_view_book_hold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_agent_amount1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_tiny"
+                android:textColor="@color/primary_variant"
+                android:visibility="gone"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/label_agent"
+                app:layout_constraintStart_toEndOf="@id/label_agent"
+                app:layout_constraintTop_toTopOf="@id/label_agent"
+                tools:text="BDT 25,059" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,202 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.multicity.MultiCityViewModel" />
+        <variable
+            name="sharedViewModel"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.ReissueChangeDateSharedViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pale_grey"
+        tools:context="net.sharetrip.ui.flights.booking.view.multicity.MultiCityFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacing_percent_100">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/spacing_large"
+                android:paddingBottom="@dimen/spacing_large"
+                android:background="@drawable/background_white_round">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.044854883" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/date_route_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/select_new_date_route"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/vertical_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
+                    android:backgroundTint="@color/dark_light_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/date_route_text"
+                    android:background="@color/gray" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/multi_city_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/reissue_search_sheet_background"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vertical_line"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_multi_city_reissue" />
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/travelers_and_class_layout"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="13dp"-->
+<!--                    android:layout_marginEnd="13dp"-->
+<!--                    android:background="@drawable/holiday_rounded_card_with_stroke_background"-->
+<!--                    android:focusable="true"-->
+<!--                    android:onClick="@{()-> viewModel.onTravelersAndClassCardViewClicked()}"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/begin_guideline"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/multi_city_recycler_view">-->
+<!--&lt;!&ndash;                android:clickable="@{sharedViewModel.reissueEligibilityResponse.cabinClassUpgradeable}"-->
+<!--&ndash;&gt;-->
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/travelers_and_class_image_view"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:text="@{String.valueOf(sharedViewModel.selectedPassengers.size())}"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/travelers_and_class_layout"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/travelers_and_class_layout"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/travelers_and_class_layout"-->
+<!--                        tools:text="03" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/view"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_marginStart="27dp"-->
+<!--                        android:background="#D8E1EB"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/travelers_and_class_image_view"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/travelers_and_class_hint_text_view"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:text="@string/travellers_class"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="@dimen/font_normal"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/view"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/numberOfTravellers"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="9dp"-->
+<!--                        android:text="@{viewModel.travelerType}"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="@dimen/font_small"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/view"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/travelers_and_class_hint_text_view"-->
+<!--                        tools:text="2 Adults" />-->
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/travelers_and_class_count_text_view"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:text="@{viewModel.travelerClass}"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="@dimen/font_small"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="Economy" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="13sp"
+                android:checked="@{viewModel.isCheckboxActive()}"
+                android:onClick="@{()->viewModel.clickTermsAndCondition()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.008"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_top"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTermsCondition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:lineSpacingExtra="4sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/checkBox"
+                app:layout_constraintTop_toBottomOf="@+id/layout_top"
+                tools:text="@string/reissue_policy" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

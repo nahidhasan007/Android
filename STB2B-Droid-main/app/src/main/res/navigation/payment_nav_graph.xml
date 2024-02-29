@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_nav_graph"
+    app:startDestination="@id/payment_dest">
+
+    <action
+        android:id="@+id/action_payment_confirmation_to_top_up_online"
+        app:destination="@+id/top_up_online_dest"
+        app:popUpTo="@id/top_up_online_dest"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_payment_confirmation_to_Dash_board"
+        app:destination="@+id/dash_board_dest"
+        app:popUpTo="@id/dash_board_dest"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/payment_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.payment.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_payment_to_top_up_online"
+            app:destination="@+id/top_up_online_dest" />
+        <action
+            android:id="@+id/action_payment_to_payment_request"
+            app:destination="@+id/payment_request_dest" />
+        <action
+            android:id="@+id/action_payment_dest_to_payment_history_dest"
+            app:destination="@id/payment_history_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/top_up_online_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.topup.TopUpFragment"
+        android:label="TopUpOnlineFragment"
+        tools:layout="@layout/fragment_top_up_online">
+        <action
+            android:id="@+id/action_payment_confirmation_dest_to_payment_method_dest"
+            app:destination="@id/payment_method_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_request_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymentrequest.PaymentRequestFragment"
+        android:label="PaymentRequestFragment"
+        tools:layout="@layout/fragment_create_payment_request">
+        <action
+            android:id="@+id/action_payment_request_dest_to_paymentConfirmationFragment"
+            app:destination="@id/payment_confirmation_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_confirmation_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.cofirmation.PaymentConfirmationFragment"
+        android:label="PaymentConfirmationFragment"
+        tools:layout="@layout/fragment_payment_confirmation">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_history_details_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.historydetails.HistoryDetailsFragment"
+        android:label="PaymentHistoryFragment"
+        tools:layout="@layout/fragment_payment_history_details">
+        <argument
+            android:name="top_up"
+            app:argType="net.sharetrip.b2b.view.topup.model.TopUp" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_history_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymenthistory.PaymentHistoryFragment"
+        android:label="PaymentHistoryFragment"
+        tools:layout="@layout/fragment_payment_history" />
+    <fragment
+        android:id="@+id/payment_method_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymentmethod.PaymentMethodFragment"
+        android:label="PaymentMethodFragment"
+        tools:layout="@layout/fragment_payment_method">
+        <argument
+            android:name="payment_url"
+            app:argType="string" />
+        <argument
+            android:name="top_up"
+            app:argType="net.sharetrip.b2b.view.topup.model.TopUp" />
+        <action
+            android:id="@+id/action_top_up_online_to_confirmation"
+            app:destination="@id/payment_confirmation_dest" />
+    </fragment>
+</navigation>

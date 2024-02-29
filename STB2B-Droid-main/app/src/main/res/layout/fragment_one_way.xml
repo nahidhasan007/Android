@@ -1,0 +1,343 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <import type="net.sharetrip.b2b.R" />
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.booking.ui.oneway.OneWayVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pale_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_one_way_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flight_sheet_background"
+            android:paddingTop="@dimen/spacing_large"
+            android:paddingBottom="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_flight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_from"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_from"
+                app:srcCompat="@drawable/ic_plane_24dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                app:layout_constraintBottom_toTopOf="@+id/address_barrier"
+                app:layout_constraintEnd_toStartOf="@+id/icon_swap"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/image_view_flight"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_from_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:text="@string/flying_from"
+                    android:textColor="@color/light_70"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_from_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{viewModel.flightSearch.origin}"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_from_hint"
+                    tools:text="Airport" />
+
+                <View
+                    android:id="@+id/from_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:background="@color/light_30"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_from_code" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_swap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/primary_round_corner"
+                android:onClick="@{() -> viewModel.onCLickSwapAirport()}"
+                android:padding="@dimen/spacing_tiny"
+                app:layout_constraintBottom_toBottomOf="@id/layout_from"
+                app:layout_constraintEnd_toStartOf="@id/layout_to"
+                app:layout_constraintStart_toEndOf="@id/layout_from"
+                app:srcCompat="@drawable/ic_swap_horizontal_mono" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/touch_effect"
+                android:paddingStart="@dimen/spacing_small"
+                app:layout_constraintBottom_toTopOf="@+id/address_barrier"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/icon_swap"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_to_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:text="@string/flying_to"
+                    android:textColor="@color/light_70"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_to_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{viewModel.flightSearch.destination}"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_to_hint"
+                    tools:text="Airport" />
+
+                <View
+                    android:id="@+id/view_to_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:background="@color/light_30"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_to_code" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/address_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="layout_to,layout_from" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toTopOf="@+id/address_barrier"
+                app:srcCompat="@drawable/ic_dot_dot_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_departure_date"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_departure_date"
+                app:srcCompat="@drawable/ic_calendar_24dp"
+                app:tint="@color/light" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_departure_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@drawable/touch_effect"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toEndOf="@+id/image_view_date"
+                app:layout_constraintTop_toTopOf="@+id/address_barrier">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_date_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:text="@string/choose_date"
+                    android:textColor="@color/light_70"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{DateUtils.INSTANCE.apiToDisplayDateFormat(viewModel.flightSearch.flightDate)}"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_date_hint"
+                    tools:text="13 Oct 21" />
+
+                <View
+                    android:id="@+id/date_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:background="@color/light_30"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_date" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/layout_departure_date"
+                app:srcCompat="@drawable/ic_dot_dot_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_traveller_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_travelers_and_class"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_travelers_and_class"
+                app:srcCompat="@drawable/ic_people_group_mono" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_travelers_and_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@drawable/touch_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> viewModel.onClickTravellers()}"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toEndOf="@+id/image_view_traveller_class"
+                app:layout_constraintTop_toBottomOf="@+id/layout_departure_date">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/travelers_and_class_hint_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:text="@string/travelers_and_class"
+                    android:textColor="@color/light_70"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/travelers_and_class_count_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@{String.format(@string/travelers_economy, viewModel.flightSearch.travellersInfo.totalTravellers, viewModel.flightSearch.travellersInfo.classType)}"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/travelers_and_class_hint_text_view"
+                    tools:text="2 Travelers - Economy" />
+
+                <View
+                    android:id="@+id/view_travelers_and_class_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:background="@color/light_30"
+                    app:layout_constraintTop_toBottomOf="@+id/travelers_and_class_count_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_search_flight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginRight="@dimen/spacing_normal"
+                android:text="@string/search_flightsv2"
+                android:textColor="@color/primary"
+                app:backgroundTint="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/layout_travelers_and_class" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_banner_promotions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/primary"
+            android:visibility="@{viewModel.isBannerAvailable ? View.GONE : View.VISIBLE}"
+            app:cardCornerRadius="@dimen/spacing_tiny"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_one_way_header">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_promotion"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="@{viewModel.isBannerAvailable ? View.GONE : View.VISIBLE}"
+                android:loadImageBinder="@{viewModel.promotionBannerImage}"
+                android:placeholder="@{R.drawable.ic_placeholder_image_view_156dp}"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

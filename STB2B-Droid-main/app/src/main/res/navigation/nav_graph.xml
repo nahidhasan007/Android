@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/launching_dest">
+
+    <action
+        android:id="@+id/action_payment_dest_to_payment_history_details"
+        app:destination="@id/payment_history_details_dest" />
+    <action
+        android:id="@+id/action_booking_to_flight_history"
+        app:destination="@+id/flight_history_dest" />
+    <action
+        android:id="@+id/action_flight_details_to_flight_segment"
+        app:destination="@+id/flight_segment_dest" />
+    <action
+        android:id="@+id/action_verification_to_image_preview"
+        app:destination="@id/image_preview_dest" />
+    <action
+        android:id="@+id/action_to_web_view"
+        app:destination="@id/web_view_dest" />
+    <action
+        android:id="@+id/action_to_confirmation"
+        app:destination="@+id/confirmation_dest" />
+    <action
+        android:id="@+id/confirmation_to_flight_search"
+        app:destination="@+id/nav_graph"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_to_login"
+        app:destination="@+id/login_dest"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_payment_confirmation_to_top_up_online"
+        app:destination="@+id/top_up_online_dest"
+        app:popUpTo="@id/top_up_online_dest"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_make_proposal_fragment_to_increaseProposalBottomSheet"
+        app:destination="@id/increase_proposal_bottom_sheet" />
+    <action
+        android:id="@+id/action_top_up_online_to_confirmation"
+        app:destination="@id/payment_confirmation_dest" />
+    <action
+        android:id="@+id/action_payment_confirmation_dest_to_payment_method_dest"
+        app:destination="@id/payment_method_dest" />
+    <action
+        android:id="@+id/action_flight_list_to_flight_details"
+        app:destination="@id/flight_details_dest" />
+    <fragment
+        android:id="@+id/login_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/flight_search_dest"
+            app:popUpTo="@id/login_dest"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_to_forget_password"
+            app:destination="@id/forget_password_dest" />
+        <action
+            android:id="@+id/action_login_to_registration_initial"
+            app:destination="@id/registration_step_one_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/home_dest"
+        android:name="net.sharetrip.b2b.view.dashboard.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_flight_search"
+            app:destination="@id/flight_search_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/forget_password_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.forget.ForgetPassWordFragment"
+        android:label="ForgetPassWordFragment"
+        tools:layout="@layout/fragment_forget_password">
+        <action
+            android:id="@+id/action_forget_password_to_check_inbox"
+            app:destination="@id/check_inbox_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/check_inbox_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.checkMail.CheckMailFragment"
+        android:label="CheckInboxFragment"
+        tools:layout="@layout/fragment_check_mail">
+        <action
+            android:id="@+id/action_check_inbox_to_log_in_dest"
+            app:destination="@+id/login_dest"
+            app:popUpTo="@id/forget_password_dest"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registration_step_one_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.register.SignUpStepOneFragment"
+        android:label="registrationInitialFragment"
+        tools:layout="@layout/fragment_sign_up_step_one">
+        <action
+            android:id="@+id/action_registration_initial_to_registration_final"
+            app:destination="@id/registration_step_two_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registration_step_two_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.register.SignUpStepTwoFragment"
+        android:label="registrationFinalFragment"
+        tools:layout="@layout/fragment_sign_up_step_two">
+        <action
+            android:id="@+id/action_registration_final_to_request_submitted"
+            app:destination="@id/request_submitted_dest" />
+        <argument
+            android:name="agent_info"
+            app:argType="net.sharetrip.b2b.view.authentication.model.AgentInformation" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/request_submitted_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.submitted.RequestCompleteFragment"
+        android:label="RequestSubmittedFragment"
+        tools:layout="@layout/fragment_request_submitted" />
+
+    <fragment
+        android:id="@+id/flight_search_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.search.FlightSearchFragment"
+        android:label="FlightSearchFragment"
+        tools:layout="@layout/fragment_flight_search">
+        <action
+            android:id="@+id/action_flight_search_dest_to_flight_list_fragment"
+            app:destination="@id/flight_list_fragment" />
+        <action
+            android:id="@+id/action_flight_search_to_airport_search"
+            app:destination="@id/airport_search_dest" />
+        <action
+            android:id="@+id/action_flight_search_dest_to_travellers_fragment"
+            app:destination="@id/travellers_fragment_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_list_fragment"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.flightlist.FlightListFragment"
+        android:label="FlightListFragment"
+        tools:layout="@layout/fragment_flight_search_list">
+        <action
+            android:id="@+id/action_flight_list_to_flight_filter"
+            app:destination="@id/fragment_flight_filter" />
+        <argument
+            android:name="flightSearch"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightSearch" />
+        <action
+            android:id="@+id/action_flight_list_fragment_to_makeProposalFragment"
+            app:destination="@id/make_proposal_fragment" />
+        <action
+            android:id="@+id/action_flight_list_fragment_to_cardPriceBottomSheet"
+            app:destination="@id/cardPriceBottomSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/airport_search_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.airport.AirportSearchFragment"
+        android:label="AirportSearchFragment"
+        tools:layout="@layout/fragment_airport_search">
+        <argument
+            android:name="trip_type"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/travellers_fragment_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.travellers.TravellersFragment"
+        android:label="TravellersFragment"
+        tools:layout="@layout/fragment_travelers">
+        <argument
+            android:name="trip_type"
+            app:argType="string" />
+        <argument
+            android:name="flight_date"
+            app:argType="string" />
+        <argument
+            android:name="travellers_info"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.TravellersInfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/passenger_list_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.passengerlist.PassengerListFragment"
+        android:label="PassengerListFragment"
+        tools:layout="@layout/fragment_passenger_list">
+        <argument
+            android:name="isDomestic"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_passenger_list_to_details"
+            app:destination="@id/passenger_dest" />
+        <action
+            android:id="@+id/action_passenger_list_to_verification"
+            app:destination="@id/verification_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/passenger_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.passenger.PassengerFragment"
+        android:label="PassengerFragment"
+        tools:layout="@layout/fragment_passenger">
+        <argument
+            android:name="key_passenger_id"
+            app:argType="string" />
+        <argument
+            android:name="isDomestic"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_passenger_to_nationality"
+            app:destination="@id/nationality_dest" />
+        <action
+            android:id="@+id/action_passenger_to_bottom_sheet"
+            app:destination="@id/bottom_sheet_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nationality_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.nationality.NationalityListFragment"
+        android:label="NationalityListFragment"
+        tools:layout="@layout/fragment_nationality_list" />
+
+    <dialog
+        android:id="@+id/bottom_sheet_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.passenger.SelectBottomSheet"
+        android:label="SelectBottomSheet"
+        tools:layout="@layout/bottom_sheet_select">
+        <argument
+            android:name="bottom_sheet_title"
+            app:argType="string" />
+        <argument
+            android:name="navigation_result_key"
+            app:argType="string" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/fragment_flight_filter"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.filter.FlightFilterFragment"
+        android:label="FlightFilterFragment"
+        tools:layout="@layout/fragment_flight_filter">
+        <argument
+            android:name="totalFlight"
+            app:argType="string" />
+        <argument
+            android:name="flightFilter"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightFilter" />
+        <argument
+            android:name="flightSearch"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightSearch" />
+        <action
+            android:id="@+id/action_flight_filter_to_bottom_filter_list"
+            app:destination="@id/bottom_filter_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mail_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.maildetails.MailDetailsFragment"
+        android:label="MailDetailsFragment"
+        tools:layout="@layout/fragment_email_details">
+        <argument
+            android:name="flightSearch"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightSearch" />
+        <argument
+            android:name="updatedFlightList"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.Flights[]" />
+
+        <argument
+            android:name="cancellation_policy"
+            app:argType="boolean" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/bottom_filter_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.filter.FilterBottomSheet"
+        android:label="FilterBottomSheet"
+        tools:layout="@layout/layout_filter_bottom_sheet">
+        <argument
+            android:name="arg_filter_title"
+            app:argType="integer" />
+        <argument
+            android:name="arg_flight_filter"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightFilter" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/flight_segment_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.segment.FlightSegmentFragment"
+        android:label="FlightSegmentFragment"
+        tools:layout="@layout/fragment_segment">
+
+        <argument
+            android:name="flight_details"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.Flights" />
+        <argument
+            android:name="flight_history"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+        <argument
+            android:name="selected_position"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/make_proposal_fragment"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.proposal.MakeProposalFragment"
+        android:label="MakeProposalFragment">
+        <argument
+            android:name="selectedFlightList"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.Flights[]" />
+        <argument
+            android:name="flightSearch"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.FlightSearch" />
+        <action
+            android:id="@+id/action_make_proposal_fragment_to_mail_details_dest"
+            app:destination="@id/mail_details_dest" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/increase_proposal_bottom_sheet"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.proposal.IncreaseProposalBottomSheet"
+        android:label="IncreaseProposalBottomSheet"
+        tools:layout="@layout/fragment_proposal_details" />
+
+    <fragment
+        android:id="@+id/flight_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.flightdetails.FlightDetailsFragment"
+        android:label="FlightDetailsFragment"
+        tools:layout="@layout/fragment_flight_details">
+        <argument
+            android:name="flight_details"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.Flights" />
+        <action
+            android:id="@+id/action_flight_details_to_flight_rules"
+            app:destination="@+id/flight_rules_dest" />
+        <action
+            android:id="@+id/action_flight_details_to_passengers"
+            app:destination="@id/passenger_list_dest" />
+        <action
+            android:id="@+id/action_flight_details_to_fare_details_dest"
+            app:destination="@+id/fare_details_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_rules_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.rules.FlightRulesFragment"
+        android:label="FlightRulesFragment"
+        tools:layout="@layout/fragment_flight_rules">
+        <argument
+            android:name="search_id"
+            app:argType="string" />
+        <argument
+            android:name="session_id"
+            app:argType="string" />
+        <argument
+            android:name="sequence_code"
+            app:argType="string" />
+        <argument
+            android:name="selected_rules"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verification_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.verification.VerificationFragment"
+        android:label="VerificationFragment"
+        tools:layout="@layout/fragment_verification">
+        <argument
+            android:name="isDomestic"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_verification_to_booking_summary"
+            app:destination="@+id/booking_summary_dest" />
+        <action
+            android:id="@+id/action_passenger_to_update_contact_sheet"
+            app:destination="@id/update_contact_dest" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/booking_summary_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.summary.BookingSummaryFragment"
+        android:label="BookingSummaryFragment"
+        tools:layout="@layout/fragment_booking_summary">
+        <action
+            android:id="@+id/action_booking_summary_to_confirmation"
+            app:destination="@+id/booking_confirmation_dest" />
+        <argument
+            android:name="contact_verification"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.ContactInfo" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/booking_confirmation_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.confirm.BookingConfirmFragment"
+        android:label="BookingConfirmFragment"
+        tools:layout="@layout/fragment_booking_confirm">
+        <action
+            android:id="@+id/action_confirmation_to_home"
+            app:destination="@id/nav_graph"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="isConfirmed"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="contact_verification"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.ContactInfo" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/update_contact_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.verification.UpdateContactBottomSheet"
+        android:label="ContactUpdateBottomSheet"
+        tools:layout="@layout/item_contact_information">
+        <argument
+            android:name="contact"
+            app:argType="net.sharetrip.b2b.view.flight.booking.model.ContactInfo" />
+    </dialog>
+
+    <!--<include app:graph="@navigation/payment_nav_graph" />-->
+
+    <fragment
+        android:id="@+id/payment_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.payment.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_payment_dest_to_payment_history_dest"
+            app:destination="@id/payment_history_dest" />
+        <action
+            android:id="@+id/action_payment_to_top_up_online"
+            app:destination="@+id/top_up_online_dest" />
+        <action
+            android:id="@+id/action_payment_to_payment_request"
+            app:destination="@+id/payment_request_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/top_up_online_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.topup.TopUpFragment"
+        android:label="TopUpOnlineFragment"
+        tools:layout="@layout/fragment_top_up_online"></fragment>
+
+    <fragment
+        android:id="@+id/payment_request_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymentrequest.PaymentRequestFragment"
+        android:label="PaymentRequestFragment"
+        tools:layout="@layout/fragment_create_payment_request">
+        <action
+            android:id="@+id/action_payment_request_dest_to_paymentConfirmationFragment"
+            app:destination="@id/payment_confirmation_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_confirmation_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.cofirmation.PaymentConfirmationFragment"
+        android:label="PaymentConfirmationFragment"
+        tools:layout="@layout/fragment_payment_confirmation" />
+
+    <fragment
+        android:id="@+id/payment_history_details_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.historydetails.HistoryDetailsFragment"
+        android:label="PaymentHistoryFragment"
+        tools:layout="@layout/fragment_payment_history_details">
+        <argument
+            android:name="top_up"
+            app:argType="net.sharetrip.b2b.view.topup.model.TopUp" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payment_history_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymenthistory.PaymentHistoryFragment"
+        android:label="PaymentHistoryFragment"
+        tools:layout="@layout/fragment_payment_history" />
+
+    <fragment
+        android:id="@+id/payment_method_dest"
+        android:name="net.sharetrip.b2b.view.topup.ui.paymentmethod.PaymentMethodFragment"
+        android:label="PaymentMethodFragment"
+        tools:layout="@layout/fragment_payment_method">
+        <argument
+            android:name="payment_url"
+            app:argType="string" />
+        <argument
+            android:name="top_up"
+            app:argType="net.sharetrip.b2b.view.topup.model.TopUp" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/launching_dest"
+        android:name="net.sharetrip.b2b.view.authentication.ui.welcome.LaunchingFragment"
+        android:label="LaunchingFragment"
+        tools:layout="@layout/fragment_launching">
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@+id/login_dest"
+            app:popUpTo="@id/launching_dest"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_welcome_to_dash_board_dest"
+            app:destination="@+id/flight_search_dest"
+            app:popUpTo="@id/launching_dest"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_history_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.historylist.FlightHistoryFragment"
+        android:label="FlightHistoryFragment"
+        tools:layout="@layout/fragment_flight_history">
+        <action
+            android:id="@+id/action_flight_history_dest_to_filter"
+            app:destination="@+id/history_filter_dest" />
+        <action
+            android:id="@+id/action_flight_history_dest_to_bookingHistoryDetailsFragment"
+            app:destination="@id/bookingHistoryDetailsFragment" />
+        <action
+            android:id="@+id/action_flight_history_dest_to_history_details_dest"
+            app:destination="@id/flight_history_details_dest" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/image_preview_dest"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.passenger.ImagePreviewFragment"
+        android:label="ImagePreviewFragment"
+        tools:layout="@layout/fragment_image_preview">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/more_dest"
+        android:name="net.sharetrip.b2b.view.more.moreinfo.MoreFragment"
+        android:label="MoreFragment"
+        tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_more_to_user_profile"
+            app:destination="@+id/profile_info_dest" />
+        <action
+            android:id="@+id/action_more_to_quick_passenger"
+            app:destination="@+id/quick_passengers" />
+        <action
+            android:id="@+id/action_more_to_login_dest"
+            app:destination="@+id/login_dest"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile_info_dest"
+        android:name="net.sharetrip.b2b.view.more.profileinfo.ProfileInfoFragment"
+        android:label="ProfileInfoFragment"
+        tools:layout="@layout/fragment_profile_info">
+        <argument
+            android:name="user_profile"
+            app:argType="net.sharetrip.b2b.view.authentication.model.UserProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction_upcoming_dest"
+        android:name="net.sharetrip.b2b.view.dashboard.UpcomingFragment"
+        android:label="UpcomingFragment" />
+
+    <fragment
+        android:id="@+id/history_filter_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.filter.HistoryFilterFragment"
+        android:label="HistoryFilterFragment"
+        tools:layout="@layout/fragment_history_filter" />
+
+    <fragment
+        android:id="@+id/flight_history_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.historydetails.FlightHistoryDetailsFragment"
+        android:label="FlightHistoryDetailsFragment"
+        tools:layout="@layout/fragment_flight_history_details">
+        <action
+            android:id="@+id/action_flight_details_to_passenger_details_dest"
+            app:destination="@+id/passenger_details_dest" />
+        <action
+            android:id="@+id/action_flight_details_to_fare_details_dest"
+            app:destination="@+id/fare_details_dest" />
+        <action
+            android:id="@+id/action_flight_details_to_baggage_details_dest"
+            app:destination="@+id/baggage_details_dest" />
+
+        <action
+            android:id="@+id/action_flight_details_to_reissue_change_date"
+            app:destination="@+id/reissue_change_date"
+            />
+
+        <action
+            android:id="@+id/action_flight_details_to_select_passenger"
+            app:destination="@+id/flight_history_select_passenger" />
+        <action
+            android:id="@+id/action_flight_details_to_download_voucher_dest"
+            app:destination="@+id/download_voucher_dest" />
+        <argument
+            android:name="flight_history_details"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+        <action
+            android:id="@+id/action_flight_history_details_dest_to_refundTravellerSelection"
+            app:destination="@id/refundTravellerSelection" />
+
+        <action
+            android:id="@+id/action_flight_history_details_dest_to_travellerSelection"
+            app:destination="@id/travellerSelection" />
+        <action
+            android:id="@+id/action_flight_history_details_dest_to_voidPricing"
+            app:destination="@id/voidPricing" />
+        <action
+            android:id="@+id/action_flight_history_details_dest_to_refundFlightSelection"
+            app:destination="@id/refundFlightSelection" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/booking_history"
+        android:name="net.sharetrip.b2b.view.dashboard.BookingFragment"
+        android:label="BookingFragment"
+        tools:layout="@layout/fragment_booking">
+        <action
+            android:id="@+id/action_booking_to_flight_history"
+            app:destination="@+id/flight_history_dest" />
+        <action
+            android:id="@+id/action_booking_to_flight_history_change_ticket_list"
+            app:destination="@+id/change_ticket_list" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_history_select_passenger"
+        android:name="net.sharetrip.b2b.view.flight.history.passenger.SelectPassengerFragment"
+        android:label="Select Passenger"
+        tools:layout="@layout/fragment_flight_history_select_passenger">
+        <action
+            android:id="@+id/action_flight_details_to_select_passenger"
+            app:destination="@+id/flight_history_change_ticket" />
+        <argument
+            android:name="flight_history_details"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+        <argument
+            android:name="action_code"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_history_change_ticket"
+        android:name="net.sharetrip.b2b.view.flight.history.changeticket.ChangeTicketFragment"
+        android:label="Change Ticket"
+        tools:layout="@layout/fragment_flight_history_change_ticket">
+        <argument
+            android:name="flight_history_details"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+        <argument
+            android:name="action_code"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/passenger_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.passengerdetails.PassengerDetailsFragment"
+        android:label="PassengerDetailsFragment"
+        tools:layout="@layout/fragment_passenger_details">
+        <argument
+            android:name="isDomestic"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fare_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.faredetails.FragmentFareDetails"
+        android:label="FragmentFareDetails"
+        tools:layout="@layout/fragment_fare_details">
+        <argument
+            android:name="price_breakdown"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.PriceDetails" />
+        <argument
+            android:name="isNavigateFromFlightDetails"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/baggage_details_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.baggagedetails.BaggageDetailsFragment"
+        android:label="BaggageDetailsFragment" />
+
+    <fragment
+        android:id="@+id/reissue_change_date"
+        android:name="net.sharetrip.b2b.view.flight.history.reissue_change_date.ReissueChangeDateFragment"
+        android:label="ReissueChangeDateFragment"
+        />
+
+    <fragment
+        android:id="@+id/download_voucher_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.downloadvowcher.DownloadVoucherFragment"
+        android:label="DownloadVoucherFragment"
+        tools:layout="@layout/fragment_download_voucher" />
+
+    <fragment
+        android:id="@+id/web_view_dest"
+        android:name="net.sharetrip.b2b.view.common.WebViewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_webview" />
+
+    <fragment
+        android:id="@+id/confirmation_dest"
+        android:name="net.sharetrip.b2b.view.flight.history.confirmation.ConfirmationFragment"
+        android:label="ConfirmationFragment">
+        <argument
+            android:name="is_confirmed"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/change_ticket_list"
+        android:name="net.sharetrip.b2b.view.flight.history.changelist.ChangedFlightHistoryListFragment"
+        android:label="@string/void_refund_data_change">
+        <action
+            android:id="@+id/action_to_changed_flight_details"
+            app:destination="@id/changedFlightDetailsFragment" />
+        <action
+            android:id="@+id/action_to_changed_list_filter"
+            app:destination="@+id/changeTicketListFilterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changedFlightDetailsFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.changedetails.ChangedFlightDetailsFragment"
+        android:label="@string/details">
+        <argument
+            android:name="uuid_code"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_changed_flight_details_to_passenger_details"
+            app:destination="@+id/passenger_details_dest" />
+        <action
+            android:id="@+id/action_changed_flight_details_to_refund_details"
+            app:destination="@+id/changedFlightRefundDetailsFragment" />
+        <action
+            android:id="@+id/action_changed_flight_details_to_actual_booking_history"
+            app:destination="@+id/flight_history_details_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changedFlightRefundDetailsFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.refundDetails.ChangedFlightRefundDetailsFragment"
+        android:label="ChangedFlightRefundDetailsFragment">
+        <action
+            android:id="@+id/action_changed_flight_refunds_to_changed_ticket_list"
+            app:destination="@id/change_ticket_list" />
+        <argument
+            android:name="refundDetails"
+            app:argType="net.sharetrip.b2b.view.flight.history.model.ChangeTicketDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changeTicketListFilterFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.changelistfilter.ChangeTicketListFilterFragment"
+        android:label="ChangeTicketListFilterFragment">
+        <argument
+            android:name="arg_changed_flight_filter_object"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_open_changed_flight_filter_bottom_sheet"
+            app:destination="@id/changed_flight_filter" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/changed_flight_filter"
+        android:name="net.sharetrip.b2b.view.flight.history.changelistfilter.ChangedFlightFilterBottomSheet"
+        android:label="Changed Flight Filter"
+        tools:layout="@layout/bottom_sheet_changed_flight_filter">
+        <argument
+            android:name="arg_filter_title"
+            app:argType="integer" />
+        <argument
+            android:name="filterData"
+            app:argType="string[]" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/quick_passengers"
+        android:name="net.sharetrip.b2b.view.more.quickPassengers.QuickPassengerFragment"
+        tools:layout="@layout/fragment_quick_passenger">
+        <action
+            android:id="@+id/action_add_quick_passenger"
+            app:destination="@id/add_quick_passenger" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_quick_passenger"
+        android:name="net.sharetrip.b2b.view.more.addPassenger.AddQuickPassengerFragment"
+        tools:layout="@layout/fragment_add_quick_passenger">
+        <argument
+            android:name="quickPassenger"
+            app:argType="net.sharetrip.b2b.view.more.model.QuickPassenger" />
+
+        <action
+            android:id="@+id/action_passenger_to_nationality"
+            app:destination="@id/nationality_dest" />
+
+        <action
+            android:id="@+id/action_add_quick_passenger_to_more"
+            app:destination="@id/more_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction_details_dest"
+        android:name="net.sharetrip.b2b.view.transaction.view.details.TransactionDetailsFragment"
+        android:label="TransactionDetailsFragment">
+    <argument
+        android:name="uuid_code"
+        app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction_list_dest"
+        android:name="net.sharetrip.b2b.view.transaction.view.transactionlist.TransactionListFragment"
+        android:label="fragment_transaction_list"
+        tools:layout="@layout/fragment_transaction_list">
+
+        <action
+            android:id="@+id/action_transaction_list_to_details"
+            app:destination="@+id/transaction_details_dest" />
+        <action
+            android:id="@+id/action_transaction_list_dest_to_transaction_list_filter_dest"
+            app:destination="@id/transaction_list_filter_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/transaction_list_filter_dest"
+        android:name="net.sharetrip.b2b.view.transaction.view.filter.TransactionListFilterFragment"
+        android:label="TransactionListFilterFragment" >
+        <argument
+            android:name="arg_transaction_filter_object"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_open_transaction_filter_bottom_sheet"
+            app:destination="@id/transaction_filter" />
+    </fragment>
+    <dialog
+        android:id="@+id/transaction_filter"
+        android:name="net.sharetrip.b2b.view.transaction.view.filter.TransactionFilterBottomSheet"
+        android:label="TransactionFilterBottomSheet">
+        <argument
+            android:name="arg_filter_title"
+            app:argType="integer" />
+        <argument
+            android:name="filterData"
+            app:argType="string[]" />
+    </dialog>
+    <fragment
+        android:id="@+id/bookingHistoryDetailsFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.bookingdetails.BookingHistoryDetailsFragment"
+        android:label="BookingHistoryDetailsFragment"
+        tools:layout="@layout/booking_history_details_fragment">
+        <action
+            android:id="@+id/action_bookingHistoryDetailsFragment_to_flight_history_details_dest"
+            app:destination="@id/flight_history_details_dest" />
+        <action
+            android:id="@+id/action_bookingHistoryDetailsFragment_to_reissueDetailsFragment"
+            app:destination="@id/reissueDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reissueDetailsFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.reissueviewdetails.ReissueDetailsFragment"
+        android:label="ReissueDetailsFragment"
+        tools:layout="@layout/reissue_view_details_fragment">
+        <action
+            android:id="@+id/action_reissueDetailsFragment_to_reissuePassengerInfo"
+            app:destination="@id/reissuePassengerInfo" />
+        <action
+            android:id="@+id/action_reissueDetailsFragment_to_reissuePricingInformation"
+            app:destination="@id/reissuePricingInformation" />
+    </fragment>
+    <dialog
+        android:id="@+id/reissuePassengerInfo"
+        android:name="net.sharetrip.b2b.view.flight.history.reissuepassengerdetails.ReissuePassengerInfo"
+        android:label="ReissuePassengerInfo"
+        tools:layout="@layout/reissue_passenger_details"/>
+    <dialog
+        android:id="@+id/reissuePricingInformation"
+        android:name="net.sharetrip.b2b.view.flight.history.reissuepricing.ReissuePricingInformation"
+        android:label="ReissuePricingInformation"
+        tools:layout="@layout/view_price_details"/>
+    <fragment
+        android:id="@+id/refundTravellerSelection"
+        android:name="net.sharetrip.b2b.view.flight.history.refund.travellerselection.RefundTravellerSelection"
+        android:label="Traveller Selection"
+        tools:layout="@layout/refund_traveller_selection">
+        <action
+            android:id="@+id/action_refundTravellerSelection_to_refundFlightSelection"
+            app:destination="@id/refundFlightSelection" />
+    </fragment>
+    <fragment
+        android:id="@+id/refundFlightSelection"
+        android:name="net.sharetrip.b2b.view.flight.history.refund.flightselection.RefundFlightSelection"
+        android:label="RefundFlightSelection"
+        tools:layout="@layout/fragment_flight_selection">
+        <action
+            android:id="@+id/action_refundFlightSelection_to_refundConfirmFragment"
+            app:destination="@id/refundConfirmFragment" />
+
+        <action
+            android:id="@+id/action_refundFlightSelection_to_voidPassengerInfo"
+            app:destination="@id/voidPassengerInfo" />
+
+        <action
+            android:id="@+id/action_refundFlightSelection_to_voidFlightDetails"
+            app:destination="@id/voidFlightDetails" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/refundConfirmFragment"
+        android:name="net.sharetrip.b2b.view.flight.history.refund.refundconfirmation.RefundConfirmFragment"
+        android:label="RefundConfirmFragment"
+        tools:layout="@layout/refund_confrim_fragment"/>
+    <fragment
+        android:id="@+id/travellerSelection"
+        android:name="net.sharetrip.b2b.view.flight.history.vrrvoid.travellerselection.TravellerSelection"
+        android:label="TravellerSelection"
+        tools:layout="@layout/refund_traveller_selection">
+        <action
+            android:id="@+id/action_travellerSelection_to_voidPricing"
+            app:destination="@id/voidPricing" />
+    </fragment>
+    <fragment
+        android:id="@+id/voidPricing"
+        android:name="net.sharetrip.b2b.view.flight.history.vrrvoid.pricing.VoidPricing"
+        android:label="VoidPricing"
+        tools:layout="@layout/refund_confrim_fragment">
+        <action
+            android:id="@+id/action_voidPricing_to_voidPassengerInfo"
+            app:destination="@id/voidPassengerInfo" />
+        <action
+            android:id="@+id/action_voidPricing_to_voidFlightDetails"
+            app:destination="@id/voidFlightDetails" />
+    </fragment>
+    <dialog
+        android:id="@+id/voidPassengerInfo"
+        android:name="net.sharetrip.b2b.view.flight.history.vrrvoid.passenger.VoidPassengerInfo"
+        android:label="VoidPassengerInfo"
+        tools:layout="@layout/reissue_passenger_details"/>
+    <dialog
+        android:id="@+id/voidFlightDetails"
+        android:name="net.sharetrip.b2b.view.flight.history.vrrvoid.flightdetails.VoidFlightDetails"
+        android:label="VoidFlightDetails"
+        tools:layout="@layout/vrr_flight_details"/>
+    <dialog
+        android:id="@+id/cardPriceBottomSheet"
+        android:name="net.sharetrip.b2b.view.flight.booking.ui.flightlist.CardPriceBottomSheet"
+        android:label="CardPriceBottomSheet"
+        tools:layout="@layout/card_price_bottom_sheet"/>
+
+</navigation>

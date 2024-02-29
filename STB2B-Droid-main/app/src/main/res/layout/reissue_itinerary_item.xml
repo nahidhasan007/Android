@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/beforeDateChange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white_round">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/reviewSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/new_itinerary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#F27D00"
+                    android:text="@string/new_itinerary"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="234dp" />
+
+
+        <TextView
+            android:id="@+id/from"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/from"
+            app:layout_constraintBottom_toTopOf="@+id/locationFrom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reviewSection"
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/to"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/to"
+            app:layout_constraintBaseline_toBaselineOf="@+id/from"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            tools:ignore="NotSibling" />
+
+
+        <TextView
+            android:id="@+id/journeyDate"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/to"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            tools:ignore="NotSibling" />
+
+
+        <TextView
+            android:id="@+id/locationFrom"
+            style="@style/TitleTextBoldBlackStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toTopOf="@+id/airportFrom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/from"
+            app:layout_constraintTop_toBottomOf="@+id/from"
+            tools:text="Dhaka" />
+
+        <TextView
+            android:id="@+id/locationTo"
+            style="@style/TitleTextBoldBlackStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/locationFrom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/to"
+            tools:text="New York" />
+
+
+        <TextView
+            android:id="@+id/journeyDayTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:textColor="@color/green_700"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/locationTo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/journeyDate"
+            tools:text="18.40 MON" />
+
+
+        <TextView
+            android:id="@+id/airportFrom"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/locationFrom"
+            app:layout_constraintTop_toBottomOf="@+id/locationFrom"
+            tools:text="DAC,Hazrat..." />
+
+        <TextView
+            android:id="@+id/airportTo"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/airportFrom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/locationTo"
+            tools:text="JFK,John F..." />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            app:layout_constraintBaseline_toBaselineOf="@+id/airportTo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/journeyDayTime"
+            tools:text="15 Dec,2022" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/airlineImg"
+            android:layout_width="30dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/airportFrom"
+            app:layout_constraintTop_toBottomOf="@+id/airportFrom"
+            app:layout_constraintVertical_bias="1.0"
+            tools:src="@drawable/shimmer_image_view" />
+
+        <TextView
+            android:id="@+id/airlineName"
+            style="@style/TitleTextRegularStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toEndOf="@id/airlineImg"
+            app:layout_constraintTop_toBottomOf="@id/airportFrom"
+            tools:text="Biman Bangladesh Airlines" />
+
+        <TextView
+            android:id="@+id/flightNoTxt"
+            android:layout_width="44dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@string/flight_no"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/flightNo"
+            app:layout_constraintStart_toEndOf="@id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/date"
+            tools:text="Flight No" />
+
+        <TextView
+            android:id="@+id/flightNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/green_700"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flightNoTxt"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:text="6R0K5C" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

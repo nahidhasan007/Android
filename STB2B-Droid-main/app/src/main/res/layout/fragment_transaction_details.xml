@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <import type="net.sharetrip.b2b.util.NumberFormatKt"/>
+
+        <import type="java.text.NumberFormat" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.transaction.viewmodel.TransactionDetailsVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.transaction.view.details.TransactionDetailsFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/transactions_details" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_general_info_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="top"
+            android:letterSpacing=".01"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/general_information"
+            android:textColor="@color/dark"
+            android:textSize="14sp"
+            android:translationY="-1.8sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline2"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/center_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".55" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/begin_vertical_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_extra_large" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_vertical_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_extra_large" />
+
+        <include
+            android:id="@+id/include_created_by"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_general_info_label"
+            bind:label="@{@string/created_by}"
+            bind:text="@{viewModel.transactionUiData.userName}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="@string/status"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_tiny"
+            app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+            app:layout_constraintTop_toTopOf="@+id/include_created_by" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:setTextColor="@{viewModel.transactionUiData.status}"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/label_status"
+            tools:text="Declined" />
+
+        <include
+            android:id="@+id/include_transaction_date"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/include_created_by"
+            bind:label="@{@string/transaction_date}"
+            bind:text="@{viewModel.transactionUiData.created_at}" />
+
+        <include
+            android:id="@+id/include_ticket_number"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_created_by"
+            bind:label="@{@string/ticket_number}"
+            bind:text="@{viewModel.transactionUiData.ticket_number}" />
+
+        <include
+            android:id="@+id/include_reference"
+            layout="@layout/container_history_label_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline2"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/include_transaction_date"
+            bind:label="@{@string/reference}"
+            bind:text="@{viewModel.transactionUiData.reference}" />
+
+        <include
+            android:id="@+id/include_transaction_code"
+            layout="@layout/container_history_label_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline2"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/include_reference"
+            bind:label="@{@string/transaction_code}"
+            bind:text="@{viewModel.transactionUiData.uuid}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_transaction_summary_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="top"
+            android:letterSpacing=".01"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/transaction_summary"
+            android:textColor="@color/dark"
+            android:textSize="14sp"
+            android:translationY="-1.8sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline2"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/include_transaction_code" />
+
+        <include
+            android:id="@+id/include_payment_type"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_transaction_summary_label"
+            bind:label="@{@string/payment_type}"
+            bind:text="@{viewModel.transactionUiData.type}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/transaction_amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="@string/transaction_amount"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_tiny"
+            app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+            app:layout_constraintTop_toTopOf="@+id/include_payment_type" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="start"
+            android:text="@{viewModel.transactionUiData.amount}"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="@+id/transaction_amount_label"
+            app:layout_constraintTop_toBottomOf="@+id/transaction_amount_label"
+            tools:text="BDT 80.00" />
+
+        <include
+            android:id="@+id/include_source"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/include_payment_type"
+            bind:label="@{@string/source}"
+            bind:text="@{viewModel.transactionUiData.source}" />
+
+        <include
+            android:id="@+id/include_balance_after_transaction"
+            layout="@layout/container_history_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/center_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/include_payment_type"
+            bind:label="@{@string/balance_after_transaction}"
+            bind:text="@{viewModel.transactionUiData.balance}" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_cyclic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary_variant"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:visibility="@{ viewModel.dataLoading ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.49" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

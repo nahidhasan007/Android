@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isFirstPosition"
+            type="Boolean" />
+
+        <variable
+            name="showToolbar"
+            type="Boolean" />
+
+        <variable
+            name="flight"
+            type="net.sharetrip.b2b.view.flight.booking.model.Flight" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{isFirstPosition?@android:color/white:@android:color/transparent}"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:paddingTop="2dp"
+            android:tint="@color/dark"
+            android:visibility="@{showToolbar?View.GONE:(isFirstPosition ? View.VISIBLE : View.GONE)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_24dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:text='@{flight.originName.code + " - " + flight.destinationName.code}'
+            android:textColor="@color/dark_variant"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/imageClose"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DAC - KUL" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

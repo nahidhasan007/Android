@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/itemLineView"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/reissueCardView"
+            app:layout_constraintEnd_toStartOf="@+id/reissueCardView"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/reissueCardView" />
+
+        <View
+            android:id="@+id/topItemLineView"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/primary"
+            app:layout_constraintBottom_toTopOf="@+id/itemLineView"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/BottomItemLineView"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemLineView" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/reissueCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="#F5F7FA"
+            android:paddingBottom="16dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#CFD8E3"
+            app:strokeWidth="0.5dp"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fbfbfb"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="1dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="0dp" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dividerGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="155dp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/flight_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/dividerGuideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="DAC-LAX-DAC" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/client_price_text_View"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F27D00"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Client 23,500" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/price_text_View"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#1A2B3D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/client_price_text_View"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="BDT 23,916" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/modificationType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/green_700"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="Reissue" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/paid_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#F27D00"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/modificationType"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="Paid" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/automationType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#FFE1C2"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="#F27D00"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/paid_text_view"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_code"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="Auto" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/classTypeICon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_takeoff_icon2"
+                    app:srcCompat="@drawable/ic_flight_seat_mono"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/cabinClass"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:textColor="@color/natural_black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/classTypeICon"
+                    app:layout_constraintEnd_toStartOf="@+id/bookingID"
+                    app:layout_constraintStart_toEndOf="@+id/classTypeICon"
+                    app:layout_constraintTop_toTopOf="@+id/classTypeICon"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="28 FEB,23" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bookingID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/cabinClass"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/cabinClass"
+                    tools:text="ID : STFL73504197" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flight_takeoff_icon2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/modificationType"
+                    app:srcCompat="@drawable/flight_mono_ic"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tripType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:textColor="@color/natural_black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/flight_takeoff_icon2"
+                    app:layout_constraintEnd_toStartOf="@+id/issueDate"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/flight_takeoff_icon2"
+                    app:layout_constraintTop_toTopOf="@+id/flight_takeoff_icon2"
+                    tools:text="Round Trip" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/issueDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:textColor="@color/natural_black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/tripType"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/tripType"
+                    tools:text="Issued on 28 Mar 23" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/passengerIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/classTypeICon"
+                    app:srcCompat="@drawable/ic_watch_mono"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/departureDateTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="@color/natural_black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/passengerIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/pnrNumber"
+                    app:layout_constraintStart_toEndOf="@+id/passengerIcon"
+                    app:layout_constraintTop_toTopOf="@+id/passengerIcon"
+                    tools:text="02 jan 2023, 3.15 pm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/pnrNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/departureDateTime"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/departureDateTime"
+                    tools:layout_conversion_wrapHeight="71"
+                    tools:layout_conversion_wrapWidth="276"
+                    tools:text="Airline PNR : 55MTXE" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/date_image_view2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/passengerIcon"
+                    app:srcCompat="@drawable/ic_tic_timer"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/arrivalDateTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="@color/natural_black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/date_image_view2"
+                    app:layout_constraintEnd_toStartOf="@+id/resPnrNumber"
+                    app:layout_constraintStart_toEndOf="@+id/date_image_view2"
+                    app:layout_constraintTop_toTopOf="@+id/date_image_view2"
+                    tools:text="09 Jan 2023, 7.49 pm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/resPnrNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/arrivalDateTime"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/dividerGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/arrivalDateTime"
+                    tools:text="Res.PNR : 55MTXE" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/itemViewDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:text="View Details"
+                    android:textColor="#1882FF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/arrivalDateTime"
+                    tools:ignore="MissingConstraints" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

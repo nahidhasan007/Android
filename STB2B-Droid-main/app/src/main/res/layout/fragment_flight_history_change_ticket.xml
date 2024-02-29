@@ -1,0 +1,170 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.changeticket.ChangeTicketVM" />
+
+        <import type="net.sharetrip.b2b.util.ConstantsKt" />
+
+        <variable
+            name="actionCode"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:toolbarTitle="@{actionCode}"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/booking"
+            tools:text="Change Ticket" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/begin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_submit_request"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_change_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_change_flight_ticket" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_data_change_policy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@drawable/background_white_round"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/void_refund_cancellation_policy"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    app:drawableRightCompat="@drawable/ic_right_mono"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_change_ticket" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_change_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{actionCode==ConstantsKt.TICKET_ACTION_VOID?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/input_layout_change_reason"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/input_layout_change_reason"
+                    app:srcCompat="@drawable/ic_message_24dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_change_reason"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:hint="@string/describe_change_reason"
+                    android:reasonToModify="@{actionCode}"
+                    android:visibility="@{actionCode==ConstantsKt.TICKET_ACTION_VOID?View.GONE:View.VISIBLE}"
+                    app:boxBackgroundColor="@color/background_color"
+                    app:layout_constraintEnd_toEndOf="@id/text_view_data_change_policy"
+                    app:layout_constraintStart_toEndOf="@id/image_view_change_reason"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_data_change_policy">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_travel_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusable="true"
+                        android:text="@={viewModel.requestReason}"
+                        android:textColor="@color/dark" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_box_data_change_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:checked="@={viewModel.isCheckedTermsAndCon}"
+                    android:padding="@dimen/spacing_small"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_tiny"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_layout_change_reason" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_submit_request"
+            style="@style/MaterialButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_normal"
+            android:background="@color/primary"
+            android:enabled="@{viewModel.isCheckedTermsAndCon()}"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="@{()->viewModel.modifyTicket()}"
+            android:text="@string/submit_request"
+            android:textColor="@color/light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

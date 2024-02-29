@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="totalPrice"
+            type="Double" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="price"
+            type="net.sharetrip.b2b.view.flight.booking.model.PriceBreakdown" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_passenger_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:text="@{price.type+` X `+ price.numberPaxes}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_total_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:text="@string/total_price"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            android:visibility="@{position==0?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:fontFamily="sans-serif-medium"
+            android:text="@{``+NumberFormat.getInstance(Locale.US).format(Double.valueOf(totalPrice))}"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintBottom_toBottomOf="@+id/input_layout_tax"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_base_fare"
+            style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_huge_greater"
+            app:hintTextColor="@color/dark_light"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_total_price_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_passenger_type">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_base_fare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/base_fare_per_pax"
+                android:inputType="numberDecimal"
+                android:text="@{``+(price.baseFare*price.numberPaxes)}"
+                tools:ignore="RtlHardcoded" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_tax"
+            style="@style/ShareTripB2B.Base.Widget.MaterialComponents.TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_huge_greater"
+            app:hintTextColor="@color/dark_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_total_price_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_layout_base_fare">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_tax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/taxes_amp_other_charges"
+                android:inputType="numberDecimal"
+                android:text="@{``+(price.tax*price.numberPaxes)}"
+                tools:ignore="RtlHardcoded" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

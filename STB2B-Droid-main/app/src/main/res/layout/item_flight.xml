@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingBottom="@dimen/spacing_small">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_airline_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="@dimen/spacing_tiny"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_airline_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_departure_time"
+            tools:src="@tools:sample/avatars"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/image_view_airline_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="19:40" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_airline_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/font_tiny"
+            app:layout_constraintStart_toEndOf="@id/image_view_airline_logo"
+            app:layout_constraintTop_toBottomOf="@id/text_view_departure_time"
+            tools:text="Air Asia" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_departure_airline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintStart_toEndOf="@id/text_view_departure_time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DAC" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:padding="@dimen/spacing_small_tiny"
+            app:layout_constraintStart_toEndOf="@id/text_view_departure_airline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_plane_dark_mono" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_arrival_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/image_view_route"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="15:25" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_extra_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_arrival_time"
+            app:layout_constraintStart_toEndOf="@id/text_view_arrival_time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="+1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_arrival_airline_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintStart_toEndOf="@id/text_view_extra_day"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="KUL" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_flight_stop_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nonstop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="@dimen/spacing_tiny"
+            android:textColor="@color/dark_variant"
+            android:textSize="@dimen/font_tiny"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_flight_stop_count"
+            tools:text="3h 10m" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_technical_stoppage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_caution_round"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_airline_logo">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_info"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"          
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_info_mono" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_technical_stoppage_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:text="@string/technical_stoppage_details"
+                android:textColor="@color/caution_variant"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

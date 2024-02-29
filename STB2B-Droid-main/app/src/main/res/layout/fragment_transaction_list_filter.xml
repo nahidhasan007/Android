@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="transactionFilter"
+            type="net.sharetrip.b2b.view.transaction.model.TransactionFilter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_variant">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:title="@string/filter">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:fontFamily="sans-serif-medium"
+                android:text="Reset"
+                android:textColor="@color/light"
+                android:textSize="15sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_variant"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <include
+                    android:id="@+id/include_reference"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:hint="@{@string/reference_number}"
+                    bind:icon="@{@drawable/ic_info_mono}"
+                    bind:text="@{transactionFilter.reference}" />
+
+                <include
+                    android:id="@+id/include_payment_type"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_reference"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{transactionFilter.type}"
+                    bind:title="@{@string/payment_type}" />
+
+                <include
+                    android:id="@+id/include_source"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_payment_type"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{transactionFilter.source}"
+                    bind:title="@{@string/source}" />
+
+                <include
+                    android:id="@+id/include_transaction_status"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_source"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{transactionFilter.status}"
+                    bind:title="@{@string/transactions_status}" />
+
+                <include
+                    android:id="@+id/include_created_at"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_transaction_status"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{transactionFilter.date_from + transactionFilter.date_to}"
+                    bind:title="@{@string/create_at}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_filter_apply"
+            style="@style/borderless_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_normal"
+            android:background="@color/clear_blue"
+            android:text="@string/apply"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

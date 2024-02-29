@@ -1,0 +1,225 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <import type="net.sharetrip.b2b.R" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.booking.ui.multicity.MultiCityVM" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pale_grey"
+        android:paddingBottom="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_multi_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/flight_sheet_background"
+                android:paddingTop="@dimen/spacing_large"
+                android:paddingBottom="@dimen/spacing_large"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing_normal" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_multi_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_multi_city" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_first_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_multi_city"
+                    app:srcCompat="@drawable/ic_dot_dot_dot" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_add_city"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/button_add_city"
+                    app:srcCompat="@drawable/ic_add_white_24dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_add_city"
+                    style="@style/CircularWhiteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:enabled="@{viewModel.isAddButtonEnabled}"
+                    android:text="@string/add_city"
+                    android:textAllCaps="true"
+                    app:layout_constraintEnd_toStartOf="@+id/button_remove_city"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toEndOf="@+id/image_view_date"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_first_dot" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_remove_city"
+                    style="@style/CircularWhiteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:enabled="@{viewModel.isRemoveButtonEnabled}"
+                    android:text="@string/remove"
+                    android:textAllCaps="true"
+                    app:layout_constraintStart_toEndOf="@+id/button_add_city"
+                    app:layout_constraintTop_toTopOf="@+id/button_add_city"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_second_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/button_add_city"
+                    app:srcCompat="@drawable/ic_dot_dot_dot" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_travelers_and_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_travelers_and_class"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/layout_travelers_and_class"
+                    app:srcCompat="@drawable/ic_people_group_mono" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_travelers_and_class"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:background="@drawable/touch_effect"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/image_view_travelers_and_class"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_second_dot">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_travellers_and_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:text="@string/travelers_and_class"
+                        android:textColor="@color/light_70"
+                        android:textSize="@dimen/font_tiny"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/travelers_and_class_count_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@{String.format(@string/travelers_economy, viewModel.travellersInfo.totalTravellers, viewModel.travellersInfo.classType)}"
+                        android:textColor="@color/light"
+                        android:textSize="@dimen/font_normal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_travellers_and_class"
+                        tools:text="2 Travelers - Economy" />
+
+                    <View
+                        android:id="@+id/travelers_and_class_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:background="@color/light_30"
+                        app:layout_constraintTop_toBottomOf="@+id/travelers_and_class_count_text_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_search_flight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginRight="@dimen/spacing_normal"
+                    android:text="@string/search_flights"
+                    android:textColor="@color/primary"
+                    app:backgroundTint="@android:color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_travelers_and_class" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_banner_promotions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/primary"
+                android:visibility="@{viewModel.isBannerAvailable ? View.GONE : View.VISIBLE}"
+                app:cardCornerRadius="@dimen/spacing_tiny"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_multi_city">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_promotion"
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:visibility="@{viewModel.isBannerAvailable ? View.GONE : View.VISIBLE}"
+                    android:loadImageBinder="@{viewModel.promotionBannerImage}"
+                    android:placeholder="@{R.drawable.ic_placeholder_image_view_156dp}"
+                    android:scaleType="centerCrop" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

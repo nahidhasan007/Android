@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.R" />
+
+        <variable
+            name="selectedPosition"
+            type="Integer" />
+
+        <variable
+            name="gateWay"
+            type="net.sharetrip.b2b.view.topup.model.GateWay" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_payment_method"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:background="@{gateWay.selected?@drawable/border_selected:@drawable/border_deselected}"
+        android:loadImageBinder="@{gateWay.logo.medium}"
+        android:padding="@dimen/spacing_tiny"
+        android:placeholder="@{R.drawable.ic_placeholder_image_view_156dp}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_placeholder_image_view_156dp" />
+</layout>

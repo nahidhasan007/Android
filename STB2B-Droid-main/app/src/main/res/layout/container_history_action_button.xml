@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.historydetails.FlightHistoryDetailsVM" />
+
+        <variable
+            name="flightHistory"
+            type="net.sharetrip.b2b.view.flight.history.model.FlightHistory" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_action_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_date_change"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            android:visibility="@{flightHistory.isReissueable? View.VISIBLE : View.GONE}"
+            app:iconTint="@color/primary"
+            android:text="@string/date_change"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_issue_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@null"
+            android:onClick="@{() -> viewModel.issueTicket()}"
+            android:text="@string/issue_ticket"
+            android:textColor="@color/primary"
+            android:visibility="@{viewModel.showIssueTicket?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_date_change"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_download_voucher"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@null"
+            android:text="@string/download_voucher"
+            android:textColor="@color/primary"
+            android:visibility="@{flightHistory.bookingStatus.equals(`Booked`)||flightHistory.bookingStatus.equals(`Issued`)||flightHistory.bookingStatus.equals(`Reissued`)?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_issue_ticket" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_booking"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@null"
+            android:text="@string/cancel_booking"
+            android:textColor="@color/primary"
+            android:visibility="@{viewModel.showCancelBooking?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_download_voucher" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_modify_booking"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            app:backgroundTint="@null"
+            android:checkable="false"
+            android:drawableTint="@color/primary"
+            android:onClick="@{()->viewModel.showAllButtons()}"
+            android:text="@string/modify_booking"
+            android:textColor="@color/primary"
+            android:visibility="@{viewModel.isShowModifyButtons()&amp;&amp;viewModel.isSHowModifyBooking()?View.VISIBLE:View.GONE}"
+            app:icon="@drawable/ic_down_24dp"
+            app:iconGravity="textEnd"
+            app:iconTint="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cancel_booking" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_temporary_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_transparent_red"
+            app:backgroundTint="@null"
+            android:text="@string/temporary_cancel"
+            android:textColor="@color/error_main"
+            android:visibility="@{!viewModel.isShowModifyButtons()&amp;&amp;viewModel.flightHistoryAction.temporaryCancel?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_modify_booking" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_void"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@null"
+            android:text="@string/void_"
+            android:textColor="@color/primary"
+            android:visibility="@{flightHistory.isVoidable? View.VISIBLE : View.GONE}"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_temporary_cancel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_refund"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue_with_blue_stroke"
+            android:visibility="@{flightHistory.isRefundable? View.VISIBLE : View.GONE}"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@null"
+            android:text="@string/refund"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_void" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_less_options"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_alice_blue"
+            android:onClick="@{()->viewModel.hideAllButtons()}"
+            android:paddingBottom="4dp"
+            android:text="@string/less_options"
+            android:textColor="@color/primary"
+            android:visibility="gone"
+            app:backgroundTint="@null"
+            app:icon="@drawable/ic_outline_keyboard_arrow_up_24"
+            app:iconGravity="textEnd"
+            app:iconTint="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_refund" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

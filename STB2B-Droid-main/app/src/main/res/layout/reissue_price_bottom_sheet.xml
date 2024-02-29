@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <import type="net.sharetrip.b2b.util.UtilsOperationKt" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="flights"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.FlightX" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.flightdetails.ReissueFlightDetailsVm" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="@dimen/spacing_small"
+        app:behavior_hideable="false"
+        android:visibility="@{viewModel.isQuoted? View.VISIBLE : View.GONE}"
+        app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+        app:elevation="@dimen/bottom_sheet_elevation"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline">
+
+        <View
+            android:id="@+id/sheet_header_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/bottom_sheet_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_sheet_background"
+            app:layout_constraintTop_toBottomOf="@+id/sheet_header_shadow">
+
+            <View
+                android:layout_width="64dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:background="@drawable/slide_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_total_payable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/total_payable"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_tiny"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Total Payable" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_payable_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{`BDT `+String.valueOf((int)flights.priceBreakdown.total)}"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_medium_large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_total_payable"
+                tools:text="BDT 23,059" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_continue"
+                style="@style/customButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:enabled="true"
+                android:onClick="@{()->viewModel.onClickApprove()}"
+                android:text="@string/approve"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_top"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dark_light_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_continue">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/label_agent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="Agent Payable"
+                    android:textColor="@color/dark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_agent_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@{String.valueOf((int)flights.priceBreakdown.total)+` BDT`}"
+                    android:textAllCaps="true"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_normal"
+                    app:layout_constraintBottom_toBottomOf="@id/label_agent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.923"
+                    app:layout_constraintStart_toEndOf="@+id/label_agent"
+                    app:layout_constraintTop_toTopOf="@id/label_agent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="BDT 23,059" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fare_difference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/fare_diff"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_top" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fare_diff_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{`BDT `+String.valueOf((int)flights.priceBreakdown.fareDifference)}"
+                android:textAllCaps="true"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintEnd_toEndOf="@+id/layout_top"
+                app:layout_constraintHorizontal_bias="0.986"
+                app:layout_constraintStart_toEndOf="@id/fare_difference"
+                app:layout_constraintTop_toBottomOf="@id/layout_top"
+                tools:text="BDT 100" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/airlineFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/airline_fee"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fare_difference" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/airline_fee_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{`BDT `+String.valueOf((int)flights.priceBreakdown.airlinesFee)}"
+                android:textAllCaps="true"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintEnd_toEndOf="@+id/fare_diff_price"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/airlineFee"
+                app:layout_constraintTop_toBottomOf="@id/fare_diff_price"
+                tools:text="BDT 100" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/convenience_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/convenience_fee"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/airlineFee" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/convenience_fee_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{`BDT `+String.valueOf((int)flights.priceBreakdown.stFee)}"
+                android:textAllCaps="true"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintEnd_toEndOf="@+id/airline_fee_price"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/convenience_fee"
+                app:layout_constraintTop_toBottomOf="@id/airline_fee_price"
+                tools:text="BDT 100" />
+
+            <View
+                android:id="@+id/itemLineView"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/convenience_fee" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_airfare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/total_airfare"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemLineView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_airfare_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{`BDT `+String.valueOf((int)flights.priceBreakdown.total)}"
+                android:textAllCaps="true"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.927"
+                app:layout_constraintStart_toEndOf="@id/total_airfare"
+                app:layout_constraintTop_toBottomOf="@id/itemLineView"
+                tools:text="BDT 100" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cancelRequest"
+                android:layout_width="328dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_border_red"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onclickReissueManualCancel()}"
+                android:text="@string/cancel_request"
+                android:textColor="#FF3326"
+                android:textSize="14sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_airfare"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

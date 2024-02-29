@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TitleTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <style name="HelperTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">11sp</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textColor">#F57F17</item>
+    </style>
+
+    <style name="TitleTextBoldBlackStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="TitleTextRegularStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">11sp</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textColor">#77818C</item>
+    </style>
+
+    <style name="AppTheme.progressAccent"  parent="Theme.MaterialComponents.Light">
+        <item name="colorAccent">@color/amberAlpha</item> <!-- Whatever color you want-->
+    </style>
+
+
+    <style name="AlmostFullScreenDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+
+
+</resources>

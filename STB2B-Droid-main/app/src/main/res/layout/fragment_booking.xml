@@ -1,0 +1,120 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="@dimen/spacing_normal">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/MyThemeOverlay_Toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/booking" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_flight"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_tiny"
+            android:text="@string/flights"
+            app:drawableTopCompat="@drawable/ic_flight"
+            app:layout_constraintEnd_toStartOf="@+id/button_void_refund_change"
+            app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_hotel"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:drawableTint="@color/primary"
+            android:visibility="gone"
+            android:padding="@dimen/spacing_large"
+            android:text="@string/hotels"
+            app:drawableTopCompat="@drawable/ic_hotel"
+            app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/button_flight"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_holiday"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_large"
+            android:text="@string/holiday"
+            android:visibility="gone"
+            app:drawableTopCompat="@drawable/ic_holiday"
+            app:layout_constraintEnd_toStartOf="@+id/button_tour"
+            app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/button_hotel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_tour"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:drawableTint="@color/primary"
+            android:padding="@dimen/spacing_large"
+            android:text="@string/group_tour"
+            android:visibility="gone"
+            app:drawableTopCompat="@drawable/ic_tour"
+            app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/button_holiday"
+            app:layout_constraintTop_toBottomOf="@+id/button_hotel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_proposal"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_tiny"
+            android:padding="@dimen/spacing_large"
+            android:text="@string/proposal"
+            app:drawableTopCompat="@drawable/ic_proposal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/button_void_refund_change"
+            app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/button_tour" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_void_refund_change"
+            style="@style/RectangleWhiteButton"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:drawableTint="@color/primary"
+            android:padding="@dimen/spacing_large"
+            android:text="@string/void_refund_change"
+            app:drawableTopCompat="@drawable/ic_booking_update"
+            app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/button_flight"
+            app:layout_constraintTop_toTopOf="@+id/button_flight" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/begin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

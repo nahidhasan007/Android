@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="net.sharetrip.b2b.util.UtilsOperationKt" />
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.refundDetails.ChangedFlightRefundDetailsVM" />
+
+        <variable
+            name="refundDetails"
+            type="net.sharetrip.b2b.view.flight.history.model.RefundDetail" />
+
+        <variable
+            name="expireTime"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:title="@string/refund_details" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/one_third_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".75" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:background="@color/light_variant"
+                android:padding="@dimen/spacing_small"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bdt"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/include_refund_applicable_amount"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                bind:label="@{@string/refund_applicable_amount}"
+                bind:value="@{String.valueOf(refundDetails.refundApplicableAmount)}" />
+
+            <include
+                android:id="@+id/include_used_fare_amount"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_refund_applicable_amount"
+                bind:isDeduct="@{true}"
+                bind:label="@{@string/used_fare_amount}"
+                bind:value='@{String.valueOf(refundDetails.farePaidByAgentUsed)}' />
+
+            <include
+                android:id="@+id/include_used_penalty_amount"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/one_third_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_used_fare_amount"
+                bind:isDeduct="@{true}"
+                bind:label="@{@string/penalty_amount}"
+                bind:value='@{String.valueOf(refundDetails.refundCharge)}' />
+
+            <include
+                android:id="@+id/include_used_service_charge"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/one_third_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_used_penalty_amount"
+                bind:isDeduct="@{true}"
+                bind:label="@{@string/service_charge_solo}"
+                bind:value='@{String.valueOf(refundDetails.refundServiceCharge)}' />
+
+            <include
+                android:id="@+id/include_total_refund_charge"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_used_service_charge"
+                bind:isDeduct="@{true}"
+                bind:label="@{@string/total_refund_charge}"
+                bind:value='@{String.valueOf(refundDetails.totalRefundCharge)}' />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@color/light_light"
+                app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_total_refund_charge" />
+
+            <include
+                android:id="@+id/include_total_amount_to_be_refunded"
+                layout="@layout/container_pricing_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                bind:label="@{@string/amount_to_be_refunded}"
+                bind:value='@{String.valueOf(refundDetails.amountToBeRefunded)}' />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_technical_stoppage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@drawable/background_caution_round"
+                android:visibility="@{viewModel.isRefundExpired()?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toTopOf="@+id/button_accept_refund_charge"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_info"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:tint="@color/caution_variant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_info_mono" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_technical_stoppage_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:text="@{`This Request will Expire at `+DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN,expireTime)}"
+                    android:textColor="@color/caution_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_view_info"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="This Request will Expire at 07:16 PM" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_accept_refund_charge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:visibility="@{viewModel.isRefundExpired()?View.GONE:View.VISIBLE}"
+                android:text="@string/accept_refund_charge"
+                app:layout_constraintBottom_toTopOf="@+id/button_decline_and_cancel_request"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/button_decline_and_cancel_request"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@drawable/background_transparent_with_blue_stroke"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/decline_n_cancel_request"
+                android:textColor="@color/primary"
+                android:visibility="@{viewModel.isRefundExpired()?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:textAllCaps="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

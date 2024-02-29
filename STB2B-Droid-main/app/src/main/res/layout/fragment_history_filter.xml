@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:title="@string/filter" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_variant"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout xmlns:bind="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                <include
+                    android:id="@+id/include_pnr"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:hint="@{@string/pnr}"
+                    bind:icon="@{@drawable/ic_info_mono}"
+                    bind:text="@{`Brac Bank Limited`}" />
+
+                <include
+                    android:id="@+id/include_booking_code"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_pnr"
+                    bind:hint="@{@string/booking_code}"
+                    bind:icon="@{@drawable/ic_bookings_black_24dp}"
+                    bind:text="@{`Brac Bank Limited`}" />
+
+                <include
+                    android:id="@+id/include_airline_code"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_booking_code"
+                    bind:hint="@{@string/airline_code}"
+                    bind:icon="@{@drawable/ic_plane_dark_mono}"
+                    bind:text="@{`Brac Bank Limited`}" />
+
+                <include
+                    android:id="@+id/include_booked_by"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_airline_code"
+                    bind:hint="@{@string/booked_by}"
+                    bind:icon="@{@drawable/ic_person_24dp}"
+                    bind:text="@{`Brac Bank Limited`}" />
+
+                <include
+                    android:id="@+id/include_kam_zone"
+                    layout="@layout/container_text_input_layout_with_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_booked_by"
+                    bind:hint="@{@string/kam_zone}"
+                    bind:icon="@{@drawable/ic_bookings_black_24dp}"
+                    bind:text="@{`Brac Bank Limited`}" />
+
+                <include
+                    android:id="@+id/include_booking_status"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_extra_large"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_kam_zone"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{@string/booked}"
+                    bind:title="@{@string/booking_status}" />
+
+                <include
+                    android:id="@+id/include_payment_status"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_booking_status"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{@string/kam_zone}"
+                    bind:title="@{@string/payment_status}" />
+
+                <include
+                    android:id="@+id/include_booking_date"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_payment_status"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{@string/kam_zone}"
+                    bind:title="@{@string/booking_date}" />
+
+                <include
+                    android:id="@+id/include_fly_date"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_booking_date"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{@string/kam_zone}"
+                    bind:title="@{@string/fly_date}" />
+
+                <include
+                    android:id="@+id/include_time_limit"
+                    layout="@layout/container_box_with_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/end_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/include_fly_date"
+                    bind:hasSubtitle="@{true}"
+                    bind:subTitle="@{@string/kam_zone}"
+                    bind:title="@{@string/time_limit}" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    app:layout_constraintTop_toBottomOf="@+id/include_time_limit" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_filter_apply"
+            style="@style/borderless_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_normal"
+            android:background="@color/clear_blue"
+            android:text="@string/apply"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

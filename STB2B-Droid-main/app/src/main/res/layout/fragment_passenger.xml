@@ -1,0 +1,703 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.booking.ui.passenger.PassengerVM" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/container_nested_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context="net.sharetrip.ui.flights.checkout.view.passenger.PassengerFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_constrain_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/center_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primary"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_left_white_24dp"
+                app:title="@{viewModel.toolbarTitle}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_quick_pick"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:tint="@color/stone_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/quickPick_input_layout"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/quickPick_input_layout"
+                app:srcCompat="@drawable/ic_people_group_mono" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/quickPick_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:boxBackgroundColor="@color/light"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/image_view_quick_pick"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:ignore="RtlHardcoded">
+
+                <net.sharetrip.b2b.widgets.TextInputAutoCompleteTextView
+                    android:id="@+id/quickPick_auto_complete_text_view"
+                    style="?attr/editTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:hint="@string/select_from_passenger_quick_pick"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    app:drawableRightCompat="@drawable/ic_down_24dp"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_profile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_given_name"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_given_name"
+                app:srcCompat="@drawable/ic_profile_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_given_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_profile"
+                app:layout_constraintTop_toBottomOf="@id/quickPick_input_layout"
+                tools:ignore="RtlHardcoded">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_given_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:onTextChanged="@{viewModel.onTextChangedForFirstName}"
+                    android:text="@={viewModel.passenger.firstName}"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_last_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperText="@string/required"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/layout_input_given_name"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_given_name"
+                tools:ignore="RtlHardcoded">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:onTextChanged="@{viewModel.onTextChangedForLastName}"
+                    android:text="@={viewModel.passenger.lastName}"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_gender_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:fontFamily="sans-serif"
+                android:text="@string/select_your_gender"
+                android:textColor="@color/dark_light"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/layout_input_last_name"
+                app:layout_constraintTop_toBottomOf="@id/layout_input_last_name" />
+
+            <LinearLayout
+                android:id="@+id/layout_gender_selection"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@id/text_view_gender_selection"
+                app:layout_constraintTop_toBottomOf="@id/text_view_gender_selection">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_selected"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:text="@string/gender_male"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    android:visibility="@{viewModel.isMale ? View.VISIBLE : View.GONE}"
+                    app:drawableLeftCompat="@drawable/ic_male_32dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_deselected"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:onClick="@{() -> viewModel.onClickGender(Boolean.TRUE)}"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:text="@string/gender_male"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    android:visibility="@{viewModel.isMale ? View.GONE : View.VISIBLE}"
+                    app:drawableLeftCompat="@drawable/ic_male_32dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_selected"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:text="@string/gender_female"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    android:visibility="@{viewModel.isMale ? View.GONE : View.VISIBLE}"
+                    app:drawableLeftCompat="@drawable/ic_female_32dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_deselected"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:onClick="@{() -> viewModel.onClickGender(Boolean.FALSE)}"
+                    android:paddingStart="@dimen/spacing_normal"
+                    android:text="@string/gender_female"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_medium"
+                    android:visibility="@{viewModel.isMale ? View.VISIBLE : View.GONE}"
+                    app:drawableLeftCompat="@drawable/ic_female_32dp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_nationality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_nationality"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_nationality"
+                app:srcCompat="@drawable/ic_place_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_nationality"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_nationality"
+                app:layout_constraintTop_toBottomOf="@+id/layout_gender_selection">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_nationality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/nationality"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:text="@={viewModel.passenger.nationality}"
+                    app:drawableRightCompat="@drawable/ic_down_24dp"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_calender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/dark"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_date_of_birth"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_date_of_birth"
+                app:srcCompat="@drawable/ic_calendar_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_date_of_birth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperText="@string/required"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_calender"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_nationality">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/date_of_birth"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@{viewModel.birthDate}"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isDomestic()?View.GONE:View.VISIBLE}"
+                app:constraint_referenced_ids="icon_passport,layout_input_passport_number,icon_passport_expire,layout_input_passport_date,layout_upload_passport_and_visa" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_passport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_passport_number"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_passport_number"
+                app:srcCompat="@drawable/ic_visa_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_passport_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperText="@string/required"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_passport"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_date_of_birth">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_passport_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:hint="@string/passport_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:maxLength="9"
+                    android:onTextChanged="@{viewModel.onTextChangedForPassportNumber}"
+                    android:text="@={viewModel.passenger.passportNumber}"
+                    tools:ignore="RtlHardcoded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_passport_expire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_passport_date"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_passport_date"
+                app:srcCompat="@drawable/ic_calendar_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_passport_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperText="@string/required"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_passport_expire"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_passport_number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_passport_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/passport_expire_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:text="@={viewModel.passportExpireDate}"
+                    app:drawableRightCompat="@drawable/ic_down_24dp"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_plane"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/dark"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_flyer_number"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_flyer_number"
+                app:srcCompat="@drawable/ic_flight_flying_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_flyer_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_seat_preference"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_seat_preference">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_flyer_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:hint="@string/frequent_flyer_number"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:text="@={viewModel.passenger.frequentFlyerNumber}"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_upload_passport_and_visa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:gravity="bottom|center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@id/layout_input_date_of_birth"
+                app:layout_constraintTop_toBottomOf="@id/layout_input_passport_date">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/passport_copy_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passport_copy"
+                        android:textColor="@{viewModel.isPassportAdded?@color/dark:@color/dark_light}"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_passport_upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:background="@{viewModel.isPassportAdded?@drawable/border_selected:@drawable/border_deselected}"
+                        android:drawablePadding="@dimen/spacing_small"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/spacing_small"
+                        android:setTintAndTextColor="@{viewModel.isPassportAdded}"
+                        android:text="@string/upload"
+                        android:textSize="@dimen/font_medium"
+                        app:drawableLeftCompat="@drawable/ic_upload_32dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/passport_copy_text" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/visa_copy_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/visa_copy"
+                        android:textColor="@{viewModel.isVisaAdded()?@color/dark:@color/dark_light}"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_visa_upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:background="@{viewModel.isVisaAdded()?@drawable/border_selected:@drawable/border_deselected}"
+                        android:drawablePadding="@dimen/spacing_small"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/spacing_small"
+                        android:setTintAndTextColor="@{viewModel.isVisaAdded}"
+                        android:text="@string/upload"
+                        android:textSize="@dimen/font_medium"
+                        app:drawableLeftCompat="@drawable/ic_upload_32dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/visa_copy_text" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_seat_preference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_input_seat_preference"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/layout_input_seat_preference"
+                app:srcCompat="@drawable/ic_flight_seat_24dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_seat_preference"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:boxBackgroundColor="@color/light"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toEndOf="@+id/icon_plane"
+                app:layout_constraintTop_toBottomOf="@+id/layout_upload_passport_and_visa">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_seat_preference"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:hint="@string/seat_preference"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:text="@={viewModel.passenger.seatPreference}"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_meal"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_flyer_number">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/light_variant"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_meal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/meal_preference"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/meal_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif"
+                        android:hint="Any"
+                        android:maxLines="1"
+                        android:text="@={viewModel.passenger.mealPreference}"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_meal" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/meal_summary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/title_meal"
+                        app:srcCompat="@drawable/ic_right_mono" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_wheelchair"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@color/light_variant"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_meal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/light_variant"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_wheelchair"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/wheelChair_if_needed"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/wheelchair_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/not_required"
+                        android:maxLines="1"
+                        android:text="@={viewModel.passenger.wheelChair}"
+                        android:textSize="@dimen/font_tiny"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_wheelchair" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/wheelchair_summary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/title_wheelchair"
+                        app:srcCompat="@drawable/ic_right_mono" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/borderless_button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@color/clear_blue"
+                android:onClick="@{() -> viewModel.clickOnNextButton()}"
+                android:text="@string/next_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_wheelchair" />
+
+            <ProgressBar
+                android:id="@+id/search_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.dataLoading? View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

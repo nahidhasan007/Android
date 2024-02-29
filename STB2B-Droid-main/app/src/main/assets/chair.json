@@ -1,0 +1,34 @@
+[
+  {
+    "code": "",
+    "name": "Any"
+  },
+  {
+    "code": "WCHR",
+    "name": "Passenger can not walk short distance up or down stairs."
+  },
+  {
+    "code": "WCHS",
+    "name": "Passenger can not walk short distance, but not up or down stairs"
+  },
+  {
+    "code": "WCHC",
+    "name": "Passenger cannot walk any distance and will require the aisle chair to board."
+  },
+  {
+    "code": "WCOB",
+    "name": "On-board aisle wheelchair requested"
+  },
+  {
+    "code": "WCMP",
+    "name": "Passenger is traveling with a manual wheelchair."
+  },
+  {
+    "code": "WCBD",
+    "name": "Passenger is traveling with a dry cell battery-powered wheelchair."
+  },
+  {
+    "code": "WCBW",
+    "name": "Passenger is traveling with a wet cell battery-powered wheelchair."
+  }
+]

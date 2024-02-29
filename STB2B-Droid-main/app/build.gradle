@@ -1,0 +1,120 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "net.sharetrip.b2b"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 28
+        versionName "@string/app_version"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"true"]
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"false"]
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    api(Libs.kotlin_stdlib)
+
+    // Kotlin coroutine and android dependence
+    api(Libs.kotlinx_coroutines_core)
+    api(Libs.kotlinx_coroutines_android)
+
+    //api(Libs.core_ktx)
+    api(Libs.appcompat)
+    api(Libs.material)
+    api(Libs.constraintlayout)
+
+    //View pager 2
+    api(Libs.viewpager2)
+
+    // ViewModel & LiveData
+    api(Libs.lifecycle_viewmodel_ktx)
+    api(Libs.lifecycle_livedata_ktx)
+
+    // Navigation component
+    api(Libs.navigation_fragment_ktx)
+    api(Libs.navigation_ui_ktx)
+
+    //Retrofit
+    api(Libs.retrofit)
+    api(Libs.converter_moshi)
+    api(Libs.logging_interceptor)
+
+    // Room & Kotlin Extensions and Coroutines support for Room
+    api(Libs.room_runtime)
+    kapt(Libs.room_compiler)
+    api(Libs.room_ktx)
+
+    // Coil - Image loading library
+    api(Libs.coil)
+
+    // SHIMMER ANIMATION
+    api(Libs.shimmer)
+
+    //Gson
+    api(Libs.gson)
+
+    //Firebase
+    api platform(Libs.firebase_bom)
+    api(Libs.firebase_perf)
+    api(Libs.firebase_crashlytics)
+    api(Libs.firebase_analytics)
+    api(Libs.firebase_remote_config)
+
+    // android stepper library
+    api("com.github.sharetripnet:android-stepper:v4.0.0")
+
+    // android paging library v3
+    api("androidx.paging:paging-runtime-ktx:3.1.0")
+    // kizitonwose calendar
+    api("com.github.kizitonwose:CalendarView:0.3.2")
+    // glide
+    api("com.github.bumptech.glide:glide:4.0.0")
+    testImplementation(Libs.junit_junit) //'junit:junit:4.+'
+    androidTestImplementation(Libs.androidx_test_ext_junit) //'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation(Libs.espresso_core) //'androidx.test.espresso:espresso-core:3.3.0'
+}

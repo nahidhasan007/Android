@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="net.sharetrip.b2b.util.UtilsOperationKt" />
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.util.DateUtils" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.changedetails.ChangedFlightDetailsVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_white_24dp"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:title="@string/details" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/light_variant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/center_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_general_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/general_information"
+                android:textColor="@color/dark"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/include_request_type"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/label_general_info"
+                bind:label="@{@string/request_type}"
+                bind:text="@{viewModel.changedFlightDetails.requestType}" />
+
+            <include
+                android:id="@+id/include_request_placed_on"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/center_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/label_general_info"
+                bind:label="@{@string/request_placed_on}"
+                bind:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN,viewModel.changedFlightDetails.createdAt)}" />
+
+            <include
+                android:id="@+id/include_request_actual_booking_code"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_request_type"
+                bind:hasIndicator="@{true}"
+                bind:label="@{@string/actual_booking_code}"
+                bind:text='@{viewModel.changedFlightDetails.actualBookingHistory.bookingCode ?? @string/not_available}'
+                bind:textColor="@{@color/primary}" />
+
+            <include
+                android:id="@+id/include_last_updated"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/center_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_request_type"
+                bind:label="@{@string/last_updated}"
+                bind:text="@{DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN,viewModel.changedFlightDetails.updatedAt)}" />
+
+            <include
+                android:id="@+id/include_refund_processed_time"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.changedFlightDetails.refundProcessingTime!= null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_request_actual_booking_code"
+                bind:label="@{@string/refund_processed_time}"
+                bind:text="@{String.valueOf(viewModel.changedFlightDetails.refundProcessingTime)}" />
+
+            <include
+                android:id="@+id/include_reason"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_refund_processed_time"
+                bind:label="@{@string/reason}"
+                bind:text='@{viewModel.changedFlightDetails.requestReason ?? @string/not_available}' />
+
+            <include
+                android:id="@+id/include_remarks"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.changedFlightDetails.note!=null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_reason"
+                bind:label="@{@string/remarks}"
+                bind:text="@{viewModel.changedFlightDetails.note}" />
+
+            <include
+                android:id="@+id/include_amount_to_be_refunded"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.changedFlightDetails.amountToBeRefunded!= null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_remarks"
+                bind:label="@{@string/amount_to_be_refunded}"
+                bind:text="@{String.valueOf(viewModel.changedFlightDetails.amountToBeRefunded)}" />
+
+            <include
+                android:id="@+id/include_request_status"
+                layout="@layout/container_ticket_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_amount_to_be_refunded"
+                bind:label="@{@string/request_status}"
+                bind:text="@{viewModel.changedFlightDetails.requestStatus.toUpperCase()}"
+                bind:textColor="@{UtilsOperationKt.getRequestStatusColor(context, viewModel.changedFlightDetails.requestStatus)}" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_refund_expire_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@drawable/background_caution_round"
+                android:visibility="@{viewModel.changedFlightDetails.refundDetail == null || viewModel.isRefundExpired()?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_request_status">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_view_info"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:tint="@color/caution_variant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_info_mono" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_view_technical_stoppage_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:text="@{`This Request will Expire at `+DateUtils.INSTANCE.changeDateFormat(`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`,DateUtils.INSTANCE.DISPLAY_DATE_AND_TIME_PATTERN,viewModel.changedFlightDetails.expiredAt)}"
+                    android:textColor="@color/caution_variant"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_view_info"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label_details_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@string/details_information"
+                android:textColor="@color/dark_variant"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/layout_refund_expire_time" />
+
+            <include
+                android:id="@+id/include_passenger_details"
+                layout="@layout/container_box_with_arrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/label_details_information"
+                bind:title="@{@string/passenger}" />
+
+            <include
+                android:id="@+id/include_refund_charge_details"
+                layout="@layout/container_box_with_arrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:visibility="@{viewModel.changedFlightDetails.refundDetail == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/include_passenger_details"
+                bind:title="@{@string/refund_charge}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

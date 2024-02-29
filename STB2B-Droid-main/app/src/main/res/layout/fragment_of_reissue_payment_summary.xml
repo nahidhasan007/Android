@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.text.NumberFormat" />
+
+        <import type="java.util.Locale" />
+
+        <import type="android.view.View" />
+
+        <import type="net.sharetrip.b2b.view.flight.history.reissue_change_date.utils.PriceBreakDownUtil" />
+
+        <variable
+            name="flights"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.FlightX" />
+
+        <variable
+            name="user"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.models.User" />
+
+        <variable
+            name="viewModel"
+            type="net.sharetrip.b2b.view.flight.history.reissue_change_date.flightsummary.FlightSummaryViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_300"
+        android:clickable="true"
+        android:focusable="true"
+        tools:context="net.sharetrip.ui.flights.booking.view.flightdetails.FlightDetailsFragment"
+        android:orientation="horizontal">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:fillViewport="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/begin_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="8dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="8dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/center_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="172dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_one_third_guideline_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.71" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/flight_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:onClick="@{() -> viewModel.onSummaryLayoutClick()}"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/flight_icon"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:rotation="90"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_flight_16dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/flight_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginLeft="12dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:lineSpacingExtra="6sp"
+                            android:text='@{viewModel.flightInfoObservable}'
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@id/flight_icon"
+                            app:layout_constraintTop_toTopOf="@id/flight_icon"
+                            tools:text="DAC - KUL" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/flight_dates"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:lineSpacingExtra="4sp"
+                            android:text='@{viewModel.flightDateObservable}'
+                            android:textColor="#000000"
+                            android:textSize="10sp"
+                            app:layout_constraintStart_toStartOf="@id/flight_name"
+                            app:layout_constraintTop_toBottomOf="@id/flight_name"
+                            tools:text="22 Dec 19 - 25 Jan 20" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:rotation="@{viewModel.isFlightSummaryExpand() ? 270 : 90}"
+                            app:layout_constraintBottom_toBottomOf="@id/flight_dates"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/flight_name"
+                            app:srcCompat="@drawable/ic_navigate_next_blue_color_24dp" />
+
+                        <View
+                            android:id="@+id/divider_flight_top"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="#efefef"
+                            android:visibility="@{viewModel.isFlightSummaryExpand() ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintTop_toBottomOf="@id/flight_icon" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/flightInfoRecycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:visibility="@{viewModel.isFlightSummaryExpand() ? View.VISIBLE : View.GONE}"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/divider_flight_top"
+                            tools:itemCount="2"
+                            >
+<!--                            tools:listitem="@layout/item_summary_of_flight"-->
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewPaymentGateway"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/flight_summary">
+                    <!--                    android:visibility="@{ viewModel.totalPrice == 0 ? View.GONE : View.VISIBLE}"-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/payment_icon"
+                            android:layout_width="37dp"
+                            android:layout_height="40dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_payment_mono" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_label_select_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginLeft="12dp"
+                            android:fontFamily="sans-serif"
+                            android:lineSpacingExtra="8sp"
+                            android:text="@string/select_your_preferred_bank"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/payment_icon"
+                            app:layout_constraintTop_toTopOf="@id/payment_icon" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif"
+                            android:lineSpacingExtra="4sp"
+                            android:text="@string/convenience_fee_may_apply"
+                            android:textColor="#4c4c4c"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/payment_icon"
+                            app:layout_constraintTop_toBottomOf="@id/text_label_select_payment" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/list_payment_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="22dp"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/spacing_small"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/payment_icon"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_payment_method_flight" />
+
+                        <LinearLayout
+                            android:id="@+id/linearSliderDots"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_small"
+                            android:background="@android:color/white"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="6dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/list_payment_type" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/card_prefix_image_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tint="@color/gray_800"
+                            android:visibility="@{viewModel.isCardSelected() ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="@+id/card_prefix_text_input_layout"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/card_prefix_text_input_layout"
+                            app:srcCompat="@drawable/ic_credit_card_black_24dp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/card_prefix_text_input_layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_normal"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            app:boxBackgroundColor="@android:color/white"
+                            app:errorEnabled="false"
+                            app:helperTextEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/card_prefix_image_view"
+                            app:layout_constraintTop_toBottomOf="@+id/linearSliderDots"
+                            tools:ignore="RtlHardcoded">
+
+                            <net.sharetrip.b2b.view.flight.history.reissue_change_date.utils.TextInputAutoCompleteTextView
+                                android:id="@+id/card_prefix_auto_complete_text_view"
+                                style="?attr/editTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:completionThreshold="1"
+                                android:hint="@string/card_prefix"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textSize="16sp"
+                                app:drawableRightCompat="@drawable/ic_arrow_drop_down_24dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTermsCondition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="4dp"
+                    app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/bottom_sheet">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/cvTermsCondition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_tiny"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:checked="@{viewModel.isCheckboxActive}"
+                            android:onClick="@{()->viewModel.onClickTermsAndConditionCheckbox()}"
+                            app:buttonTint="@color/clear_blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTermsCondition"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:lineSpacingExtra="4sp"
+                            android:textColorLink="@color/primary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvTermsCondition"
+                            app:layout_constraintTop_toTopOf="@id/cvTermsCondition"
+                            tools:text="@string/i_agree_to_terms_condition" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bottom_sheet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bottom_sheet_background"
+                    android:clickable="true"
+                    android:clipToPadding="false"
+                    android:focusable="true"
+                    android:paddingBottom="@dimen/spacing_small"
+                    app:behavior_hideable="false"
+                    app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+                    app:elevation="@dimen/bottom_sheet_elevation"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewPaymentGateway"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:visibility="visible">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/end_horizontal_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_end="@dimen/activity_vertical_margin" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/begin_vertical_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/end_vertical_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+                    <View
+                        android:id="@+id/sheet_header_shadow"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_tiny"
+                        android:alpha="0"
+                        android:background="@drawable/bottom_sheet_header_shadow"
+                        android:stateListAnimator="@animator/active_alpha"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:targetApi="lollipop" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_hint_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="@string/your_price_summary"
+                        android:textColor="@color/gray_dark"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_header_shadow" />
+
+                    <View
+                        android:id="@+id/title_divider_view"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_divider_size"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/title_hint_text_view" />
+
+                    <View
+                        android:id="@+id/divider_view"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_divider_size"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/title_divider_view" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/airfare_difference"
+                        android:textColor="#434343"
+                        app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/divider_view" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewAmountWithoutDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        android:text="@{String.valueOf(viewModel.flightsInfo.priceBreakdown.fareDifference)}"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/font_normal"
+                        app:layout_constraintEnd_toStartOf="@id/end_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/divider_view"
+                        tools:text="218,820.0" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView_discount_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/airline_fee"
+                        android:textColor="#434343"
+                        app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/textViewAmountWithoutDiscount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_tiny"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@{String.valueOf(viewModel.flightsInfo.priceBreakdown.airlinesFee)}"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toStartOf="@id/end_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/textViewAmountWithoutDiscount"
+                        tools:text="50,000" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_label_extra_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/st_service_fee"
+                        android:textColor="#434343"
+                        android:textSize="@dimen/font_normal"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_discount_label" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_extra_discount_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text='@{String.valueOf(viewModel.flightsInfo.priceBreakdown.stFee)}'
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_label_extra_discount"
+                        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                        app:layout_constraintTop_toTopOf="@+id/text_label_extra_discount"
+                        tools:text="-0" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_advance_income_tax_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/st_convenience_fee"
+                        android:textColor="#434343"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/text_label_extra_discount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_view_advance_income_tax_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@{viewModel.totalConvenienceCharge.toString()}"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_advance_income_tax_header"
+                        app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_advance_income_tax_header"
+                        tools:text="247" />
+
+                    <View
+                        android:id="@+id/divider_view_two"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_divider_size"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                        app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_advance_income_tax_header" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/total_payable"
+                        android:textColor="#434343"
+                        app:layout_constraintStart_toStartOf="@id/begin_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/divider_view_two" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewFinalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="sans-serif-medium"
+                        android:text='@{viewModel.currency+" "+ String.valueOf(viewModel.totalPrice)}'
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                        app:layout_constraintTop_toBottomOf="@id/divider_view_two"
+                        tools:text="BDT 25,445" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/book_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/pay_now"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/begin_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/cardTermsCondition" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    android:visibility="@{viewModel.progressBar ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@id/bottom_sheet"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textLoading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/loading"
+                        android:textColor="@color/amberAlpha"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textLoading"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:theme="@style/AppTheme.progressAccent" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>

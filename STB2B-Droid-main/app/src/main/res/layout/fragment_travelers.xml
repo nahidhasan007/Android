@@ -1,0 +1,408 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="travellersVM"
+            type="net.sharetrip.b2b.view.flight.booking.ui.travellers.TravellersVM" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_light"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        tools:context="net.sharetrip.ui.flights.booking.view.travellers.TravellerNumberFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primary"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_clear_24"
+                app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+                app:title="Travellers &amp; Class"
+                app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_horizontal_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="65dp"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/begin_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_traveller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/travellers"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_medium_large"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/begin_horizontal_guideline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="end"
+                android:text="@string/age_on_the_day_of_travel"
+                android:textColor="@color/dark_variant"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_traveller"
+                app:layout_constraintRight_toLeftOf="@+id/end_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/text_view_traveller" />
+
+            <View
+                android:id="@+id/view_traveler_divider_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_divider_size"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@color/light_grey"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_traveller" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(travellersVM.numOfAdult)}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/button_adult_remove"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/button_adult_remove"
+                tools:text="2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/adult"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toBottomOf="@+id/button_adult_remove"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_adult_description"
+                app:layout_constraintStart_toEndOf="@+id/text_view_adult_number"
+                app:layout_constraintTop_toTopOf="@+id/button_adult_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_adult_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="15dp"
+                android:text="12 yrs &amp; above"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toTopOf="@+id/barrier_adult"
+                app:layout_constraintStart_toEndOf="@+id/text_view_adult_number"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_adult"
+                app:layout_constraintTop_toTopOf="@+id/button_adult_remove" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_adult_remove"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:enabled="@{travellersVM.numOfAdult > 1 ? true : false}"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onRemoveAdult()}"
+                app:icon="@drawable/ic_remove_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/button_adult_add"
+                app:layout_constraintEnd_toStartOf="@+id/button_adult_add"
+                app:layout_constraintTop_toTopOf="@+id/button_adult_add"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_adult_add"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onAddAdult()}"
+                app:icon="@drawable/ic_add_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/barrier_adult"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/view_traveler_divider_view"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_adult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_adult_add,button_adult_remove,text_view_adult_number,button_adult_remove"
+                tools:layout_editor_absoluteY="125dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_children_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(travellersVM.numOfChildren)}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/button_children_remove"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/button_children_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_children"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/children"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toBottomOf="@+id/button_children_remove"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_children_extra"
+                app:layout_constraintStart_toEndOf="@+id/text_view_children_number"
+                app:layout_constraintTop_toTopOf="@+id/button_children_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_children_extra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="15dp"
+                android:text="2-11 yrs"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toBottomOf="@+id/button_children_remove"
+                app:layout_constraintStart_toEndOf="@+id/text_view_children_number"
+                app:layout_constraintTop_toTopOf="@+id/button_children_remove" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_children_remove"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:enabled="@{travellersVM.numOfChildren> 0 ? true : false}"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onRemoveChildren()}"
+                app:icon="@drawable/ic_remove_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/button_children_add"
+                app:layout_constraintEnd_toStartOf="@+id/button_children_add"
+                app:layout_constraintTop_toTopOf="@+id/button_children_add"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_children_add"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onAddChildren()}"
+                app:icon="@drawable/ic_add_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/barrier_children"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/barrier_adult"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <View
+                android:id="@+id/divider_children_one"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_divider_size"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@color/light_grey"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/button_adult_add" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_birth_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/button_children_add"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_birth_date_selection" />
+
+            <View
+                android:id="@+id/divider_children_two"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_divider_size"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@color/light_grey"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_birth_date" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_children"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_children_remove,text_view_children_number, button_children_add, button_children_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infant_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(travellersVM.numbOfInfant)}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/button_infants_remove"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/button_infants_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/infants"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toBottomOf="@+id/button_infants_remove"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_infants_extra"
+                app:layout_constraintStart_toEndOf="@+id/text_view_infant_number"
+                app:layout_constraintTop_toTopOf="@+id/button_infants_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_infants_extra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="15dp"
+                android:text="Less then 2 yrs"
+                android:textColor="@color/dark_variant"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintBottom_toBottomOf="@+id/button_infants_remove"
+                app:layout_constraintStart_toEndOf="@+id/text_view_infant_number"
+                app:layout_constraintTop_toTopOf="@+id/button_infants_remove" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_infants_remove"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:enabled="@{travellersVM.numbOfInfant> 0 ? true : false}"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onRemoveInfant()}"
+                app:icon="@drawable/ic_remove_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/button_infants_add"
+                app:layout_constraintEnd_toStartOf="@+id/button_infants_add"
+                app:layout_constraintTop_toTopOf="@+id/button_infants_add"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_infants_add"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:minWidth="24dp"
+                android:onClick="@{() -> travellersVM.onAddInfant()}"
+                app:icon="@drawable/ic_add_white_24dp"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@id/barrier_infants"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/divider_children_two"
+                app:strokeColor="@color/mtrl_text_btn_text_color_selector" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_infants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_infants_remove, text_view_infant_number,text_view_infant, button_infants_add" />
+
+            <View
+                android:id="@+id/view_infant_divider"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_divider_size"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@color/light_grey"
+                app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/button_infants_add" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/_classes"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_medium_large"
+                app:layout_constraintStart_toStartOf="@+id/begin_vertical_guideline"
+                app:layout_constraintTop_toTopOf="@+id/barrier_infants" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_travel_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_class"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_travel_class"
+                tools:itemCount="2"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_done"
+                style="@style/borderless_button"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:background="@color/clear_blue"
+                android:text="@string/done"
+                android:textAllCaps="true"
+                android:onClick="@{() -> travellersVM.onDoneButtonClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
