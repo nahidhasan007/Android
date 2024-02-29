@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.firstfragment'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.firstfragment"
         minSdk 21
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -41,7 +41,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation 'com.example:testlibrary:1.0'
+//    implementation project(path: ':testfirstlibrary')
     testImplementation 'junit:junit:4.13.2'
+    implementation("com.example:demo-library:1.0.0")
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 }

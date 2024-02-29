@@ -10,7 +10,22 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            name = "GitHubPackages"
+            /*  Configure path to the library hosted on GitHub Packages Registry
+             *  Replace UserID with package owner userID and REPOSITORY with the repository name
+             *  e.g. "https://maven.pkg.github.com/enefce/AndroidLibrary-GPR-KDSL"
+             */
+            //url = uri("https://maven.pkg.github.com/UserID/REPOSITORY")
+            url = uri("https://maven.pkg.github.com/nahidhasan007/Nahids_library")
+
+            credentials {
+                username = "nahidhasan007"//githubProperties.get("gpr.usr") as String? ?: System.getenv("GPR_USER")
+                password = "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"//githubProperties.get("gpr.key") as String? ?: System.getenv("GPR_API_KEY")
+            }
+        }
     }
 }
 rootProject.name = "FirstFragment"
 include ':app'
+//include ':testfirstlibrary'

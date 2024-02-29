@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("maven-publish")
 }
 
 android {
@@ -82,4 +83,10 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+}
+
+afterEvaluate {
+    publishing {
+        publications {}
+    }
 }
