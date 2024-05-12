@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/addQuotesFragment"
-        android:name="com.example.mvvmapp.AddQuotesFragment"
+        android:name="com.example.mvvmapp.view.content.ContentFragment"
         android:label="fragment_add_quotes"
         tools:layout="@layout/fragment_add_quotes" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/quotesFragment2"
-        android:name="com.example.mvvmapp.quotesFragment"
+        android:name="com.example.mvvmapp.view.quotesFragment"
         android:label="fragment_quotes"
         tools:layout="@layout/fragment_quotes" >
         <action

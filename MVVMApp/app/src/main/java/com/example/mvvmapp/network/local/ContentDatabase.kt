@@ -1,16 +1,17 @@
-package com.example.mvvmapp.quote
+package com.example.mvvmapp.network.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mvvmapp.model.Content
 
-@Database(entities = [Quote::class], version = 1,exportSchema=false)
-abstract class QuoteDatabase : RoomDatabase() {
-    abstract fun quoteDao(): QuoteDao
+@Database(entities = [Content::class], version = 1,exportSchema=false)
+abstract class ContentDatabase : RoomDatabase() {
+    abstract fun quoteDao(): ContentDao
     companion object{
-        private var Instance : QuoteDatabase?=null
-        fun getDatabase(context: Context):QuoteDatabase{
+        private var Instance : ContentDatabase?=null
+        fun getDatabase(context: Context): ContentDatabase {
             val tempInstanc = Instance
             if(tempInstanc!=null)
             {
@@ -20,7 +21,7 @@ abstract class QuoteDatabase : RoomDatabase() {
             {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    QuoteDatabase::class.java,
+                    ContentDatabase::class.java,
                     "quote"
                 ).build()
                 Instance = instance

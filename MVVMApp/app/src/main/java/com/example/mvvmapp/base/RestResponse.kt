@@ -1,0 +1,17 @@
+package com.example.mvvmapp.base
+
+import com.squareup.moshi.Json
+
+data class RestResponse<T>(
+    @Json(name = "code")
+    var code: String,
+
+    @Json(name = "message")
+    var message: String,
+
+    @Json(name = "response")
+    var response: T,
+
+    @Json(name = "errors")
+    var errors: Error?
+)
