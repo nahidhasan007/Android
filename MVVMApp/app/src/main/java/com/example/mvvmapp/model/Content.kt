@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class Content(
         @PrimaryKey(autoGenerate = true)
         val id:Int,
-        val book:String,
-        val author:String
+        val title:String,
+        val url : String,
+        val description:String
 
 )
