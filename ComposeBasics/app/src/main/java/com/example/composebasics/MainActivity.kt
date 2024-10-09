@@ -26,8 +26,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.composebasics.basecomponents.InfoViewContainer
+import com.example.composebasics.coordinator.BaseNavCoordinator
 
 class MainActivity : ComponentActivity() {
+    private var _appCoordinator : BaseNavCoordinator? = null
+    private val appCoordinator get() = _appCoordinator!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -110,6 +114,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Text(text = "Login")
             }
+            InfoViewContainer()
         }
     }
 
